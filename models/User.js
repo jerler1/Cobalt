@@ -1,6 +1,14 @@
 module.exports = function (sequelize, DataTypes) {
   const User = sequelize.define("User", {
-    userName: DataTypes.STRING,
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [1, 50],
+        isAlphanumeric: true,
+        unique: true,
+      },
+    },
   });
 
   User.associate = function (models) {
