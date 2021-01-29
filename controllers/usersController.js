@@ -28,7 +28,7 @@ router.get('/users/:name', async (req, res) => {
 
 router.get('/api/users', async (req, res) => {
   try {
-    const users = db.User.findAll();
+    const users = await db.User.findAll({ include: db.Drawing });
     res.json(users);
   } catch (err) {
     console.error(err);
@@ -41,7 +41,7 @@ router.get('/api/users', async (req, res) => {
 
 router.get('/api/users/:id', async (req, res) => {
   try {
-    const user = db.User.findOne({ where: { id: req.params.id } });
+    const user = await db.User.findOne({ where: { id: req.params.id }, include: db.Drawing });
     res.json(user);
   } catch (err) {
     console.error(err);
@@ -59,7 +59,7 @@ router.post('/api/users', async (req, res) => {
   };
 
   try {
-    const result = db.User.create(newUser);
+    const result = await db.User.create(newUser);
     // should probably check the result.
     res.json({
       error: false,
@@ -76,11 +76,12 @@ router.post('/api/users', async (req, res) => {
 
 router.put('/api/users/:id', async (req, res) => {
   // update the user
+  // Do we actually need this???
 });
 
 router.delete('/api/users/:id', async (req, res) => {
   try {
-    const result = db.User.destroy({ where: { id: req.params.id } });
+    const result = await db.User.destroy({ where: { id: req.params.id } });
     res.json({
       error: false,
       message: 'ok',
