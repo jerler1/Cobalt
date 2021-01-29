@@ -3,15 +3,17 @@ module.exports = function (sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         isAlphanumeric: true,
         len: [1, 30],
       },
     },
-    link: { type: DataTypes.TEXT, aloowNull: false },
-    user_id: {
+    link: { type: DataTypes.TEXT, unique: true, allowNull: false },
+    userID: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      unique: true,
       validate: {
         isNumeric: true,
         len: [1, 6],
