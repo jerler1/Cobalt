@@ -1,8 +1,22 @@
 module.exports = function (sequelize, DataTypes) {
   const Drawing = sequelize.define("Drawing", {
-    name: { type: DataTypes.STRING },
-    link: { type: DataTypes.TEXT },
-    user_id: { type: DataTypes.INTEGER },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        isAlphanumeric: true,
+        len: [1, 30],
+      },
+    },
+    link: { type: DataTypes.TEXT, aloowNull: false },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+        len: [1, 6],
+      },
+    },
   });
 
   Drawing.associate = function (models) {
