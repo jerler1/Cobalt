@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "kitty1",
-    "database": "project2starter",
+    "database": "cobaltCanvasDB",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
