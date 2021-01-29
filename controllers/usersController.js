@@ -3,6 +3,27 @@ const db = require('../models');
 
 const router = express.Router();
 
+//  VIEW ROUTES
+
+router.get('/users', async (req, res) => {
+  try {
+    const users = await db.User.findAll();
+    res.render('all-users', { users });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+router.get('/users/:name', async (req, res) => {
+  try {
+    const user = await db.User.findOne({ where: { userName: req.params.name }, include: db.Drawing });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
 //  API ROUTES
 
 router.get('/api/users', async (req, res) => {
