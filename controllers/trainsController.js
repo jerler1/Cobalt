@@ -4,35 +4,35 @@ const db = require("../models");
 const router = express.Router();
 
 /**
- * Route to render all trains to a page. 
+ * Route to render all art to a page. 
  */
-router.get("/trains", (req, res) => {
-  db.Train.findAll()
-    .then((allTrains) => {
-      res.render("all-trains", { trains: allTrains });
+router.get("/art", (req, res) => {
+  db.Art.findAll()
+    .then((viewAll) => {
+      res.render("viewAll", { art: viewAll });
     })
     .catch((err) => {
       console.log(err);
-      //TODO: render 404 page if we're unable to return trains
+      //TODO: render 404 page if we're unable to return art
       res.status(500).end();
     });
 });
 
 /**
- * Route to render the new train form.
+ * Route to render the new art.
  */
-router.get("/trains/new", (req, res) => {
-  res.render("new-train");
+router.get("/art/new", (req, res) => {
+  res.render("create-new");
 });
 
 /**
- * Route to pull train data from the database
- * Render the train data to a pre-populate form.
+ * Route to pull art data from the database
+ * Render the art data to a canvas.
  */
-router.get("/trains/:id/edit", (req, res) => {
-  db.Train.findOne({ where: { id: req.params.id } })
-    .then((singleTrain) => {
-      res.render("edit-train", singleTrain.dataValues);
+router.get("/art/:id/edit", (req, res) => {
+  db.Art.findOne({ where: { id: req.params.id } })
+    .then((singleArt) => {
+      res.render("edit-art", singleArt.dataValues);
     })
     .catch((err) => {
       console.log(err);
@@ -41,15 +41,15 @@ router.get("/trains/:id/edit", (req, res) => {
 });
 
 /**
- * Display information about a single train.
+ * Display information about a single artist.
  */
-router.get("/trains/:id", (req, res) => {
-  db.Train.findOne({
+router.get("/art/:id", (req, res) => {
+  db.Art.findOne({
     where: { id: req.params.id },
   })
-    .then((singleTrain) => {
-      // console.log(singleTrain.dataValues);
-      res.render("single-train", singleTrain.dataValues);
+    .then((singleArt) => {
+      // console.log(singleArt.dataValues);
+      res.render("single-artist", singleArt.dataValues);
     })
     .catch((err) => {
       res.status(500).end();
@@ -57,12 +57,12 @@ router.get("/trains/:id", (req, res) => {
 });
 
 /**
- * API Route to create a new train.
+ * API Route to create new art.
  */
-router.post("/api/trains", (req, res) => {
-  db.Train.create(req.body)
-    .then((createdTrain) => {
-      res.json(createdTrain);
+router.post("/api/art", (req, res) => {
+  db.Art.create(req.body)
+    .then((createdArt) => {
+      res.json(createdArt);
     })
     .catch((err) => {
       console.log(err);
@@ -71,10 +71,10 @@ router.post("/api/trains", (req, res) => {
 });
 
 /**
- * API Route to update an existing train by ID
+ * API Route to update existing art by ID
  */
-router.put("/api/trains/:id", (req, res) => {
-  db.Train.update(req.body, {
+router.put("/api/art/:id", (req, res) => {
+  db.Art.update(req.body, {
     where: {
       id: req.params.id,
     },
@@ -89,10 +89,10 @@ router.put("/api/trains/:id", (req, res) => {
 });
 
 /**
- * API Route to delete a train by ID
+ * API Route to delete art by ID
  */
-router.delete("/api/trains/:id", (req, res) => {
-  db.Train.delete({
+router.delete("/api/art/:id", (req, res) => {
+  db.Art.delete({
     where: {
       id: req.params.id,
     },
