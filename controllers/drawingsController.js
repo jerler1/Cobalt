@@ -3,7 +3,34 @@ const db = require('../models');
 
 const router = express.Router();
 
+//  VIEW ROUTES
+
+router.get('/drawings', async (req, res) => {
+  try {
+    const drawings = await db.Drawing.findAll({ include: db.User });
+    res.render('view-all', { drawings });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
+router.get('/drawings/new', async (req, res) => {
+  res.render('create-new');
+});
+
+router.get('/drawings/:id/edit', async (req, res) => {
+  try {
+    const drawing = await db.Drawing.findOne({ where: { id: req.params.id } });
+    res.render('edit-artwork', { drawing });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Something went wrong!');
+  }
+});
+
 //  API ROUTES
+
 router.get('/api/drawings', async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
