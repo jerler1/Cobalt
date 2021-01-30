@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "Mickey19",
-    "database": "project2starter",
+    "password": "kitty1",
+    "database": "cobaltCanvasDB",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
