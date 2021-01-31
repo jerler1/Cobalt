@@ -2,7 +2,6 @@ import DrawingElement from './DrawingElement.js';
 
 const toolbar = document.querySelector('.toolbar');
 const colorInput = document.querySelector('#color');
-const toolInput = document.querySelector('#tool');
 const c = document.querySelector('canvas#main');
 const cBackground = document.querySelector('canvas#background');
 const ctx = c.getContext('2d');
@@ -97,10 +96,6 @@ function onMouseUp(e) {
   paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath));
   currentPath = null;
   drawPaths(paths);
-}
-
-function random(max) {
-  return Math.floor(Math.random() * max);
 }
 
 function drawPaths(paths) {
