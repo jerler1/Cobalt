@@ -18,7 +18,11 @@ router.get('/users', async (req, res) => {
 router.get('/users/:name', async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { userName: req.params.name }, include: db.Drawing });
-    res.render('single-artist', { user });
+    if (user != null) {
+      res.render('single-artist', { user });
+    } else {
+      res.status(404).render('not-found');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send('Something went wrong!');
@@ -60,18 +64,26 @@ router.post('/api/users', async (req, res) => {
   };
 
   try {
-    const result = await db.User.create(newUser);
+    const user = await db.User.create(newUser);
     // should probably check the result.
-    res.json({
+    res.status(201).json({
       error: false,
-      message: 'ok',
+      message: 'User created.',
+      user,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      error: true,
-      message: "Couldn't create a new user.",
-    });
+    if (error.original.code === 'ER_DUP_ENTRY') {
+      res.status(400).json({
+        error: true,
+        message: 'That username is already taken.',
+      });
+    } else {
+      res.status(500).json({
+        error: true,
+        message: "Couldn't create a new user.",
+      });
+    }
   }
 });
 
