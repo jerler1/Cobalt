@@ -1,3 +1,5 @@
+import DrawingElement from './DrawingElement.js';
+
 const toolbar = document.querySelector('.toolbar');
 const colorInput = document.querySelector('#color');
 const toolInput = document.querySelector('#tool');
@@ -68,11 +70,11 @@ function onMouseMove(e) {
       backgroundCtx.moveTo(startX, startY);
       backgroundCtx.lineTo(e.offsetX, e.offsetY);
       backgroundCtx.stroke();
-      backgroundCtx.closePath();
+      // backgroundCtx.closePath();
     } else {
       let x = e.offsetX;
       let y = e.offsetY;
-      currentPath.lineTo(x, y);
+      currentPath.push([x, y]);
       ctx.lineTo(x, y);
       ctx.stroke();
     }
@@ -84,35 +86,17 @@ function onMouseDown(e) {
   isDrawing = true;
   startX = e.offsetX;
   startY = e.offsetY;
-  ctx.moveTo(startX, startY);
-  if (tool == 'pen') {
-    currentPath = new Path2D();
-    currentPath.moveTo(startX, startY);
-  }
+  currentPath = [[startX, startY]];
 }
 
 function onMouseUp(e) {
   isDrawing = false;
   let endX = e.offsetX;
   let endY = e.offsetY;
-  if (tool == 'square') {
-    const newPath = new Path2D();
-    newPath.moveTo(startX, startY);
-    newPath.rect(startX, startY, endX - startX, endY - startY);
-    paths.push(newPath);
-  } else if (tool == 'line') {
-    const newPath = new Path2D();
-    newPath.moveTo(startX, startY);
-    newPath.lineTo(endX, endY);
-    newPath.closePath();
-    paths.push(newPath);
-  } else {
-    currentPath.lineTo(endX, endY);
-    paths.push(new Path2D(currentPath));
-    currentPath = null;
-  }
+  currentPath.push([endX, endY]);
+  paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath));
+  currentPath = null;
   drawPaths(paths);
-  ctx.closePath();
 }
 
 function random(max) {
@@ -122,7 +106,10 @@ function random(max) {
 function drawPaths(paths) {
   backgroundCtx.clearRect(0, 0, cBackground.width, cBackground.height);
   ctx.clearRect(0, 0, c.width, c.height)
-  paths.forEach(path => {
-    ctx.stroke(path);
+  paths.forEach(el => {
+    ctx.save();
+    ctx.strokeStyle = el.color;
+    ctx.stroke(el.toPath2D());
+    ctx.restore();
   });
 }
