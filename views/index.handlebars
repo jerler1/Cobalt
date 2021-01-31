@@ -1,43 +1,59 @@
 {{!-- Leaving the width of the container for the stylist of the page --}}
 {{!-- Needs Styling --}}
 <h1>Welcome to Cobalt</h1>
-<button class="button is-primary initialButtons">
+<button class="button is-primary initialCreateButton">
     <strong>Create</strong>
 </button>
-<button class="button is-primary initialButtons">
+<button class="button is-primary initialLogInButton">
     <strong>Log In</strong>
 </button>
 
-<div class="field creatingUser">
+<div class="field creatingUser is-hidden">
     <h1>Create a new user account.</h1>
     <label class="label">User Name</label>
     <div class="control">
-        <input class="input" type="text" placeholder="Input User Name Here.">
+        <input id="createUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
     </div>
 </div>
 
-<div class="field is-grouped creatingUser">
+<div class="field is-grouped creatingUser is-hidden">
     <div class="control">
         <button id="createUserSubmit" class="button">Submit</button>
     </div>
     <div class="control">
-        <button class="button makeLogInForm">Log In</button>
+        <button id="makeLogInForm" class="button">Log In</button>
     </div>
 </div>
 
-<div class="field logInUser">
+<div class="field logInUser is-hidden">
     <h1>Login to your account.</h1>
     <label class="label">User Name</label>
     <div class="control">
-        <input class="input" type="text" placeholder="Input User Name Here.">
+        <input id="logInUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
     </div>
 </div>
 
-<div class="field is-grouped logInUser">
+<div class="field is-grouped logInUser is-hidden">
     <div class="control">
-        <button class="button">Submit</button>
+        <button id="logInUserSubmit" class="button">Submit</button>
     </div>
     <div class="control">
-        <button class="button makeCreateForm">Create User Name</button>
+        <button id="makeCreateForm" class="button makeCreateForm">Create User Name</button>
     </div>
 </div>
+
+<script type="text/javascript">
+    const initialCreateButton = $(".initialCreateButton");
+    const initialLogInButton = $(".initialLogInButton");
+    const creatingUser = $(".creatingUser");
+    const logInUser = $(".logInUser");
+
+    const userNameInput = $("#createUserNameInput");
+    const createUserSubmit = $("#createUserSubmit");
+    const makeLogInForm = $("makeLogInForm");
+    const logInUserNameInput = $("#logInUserNameInput");
+    const logInUserSubmit = $("#logInUserSubmit");
+    const makeCreateForm = $("#makeCreateForm");
+    
+
+</script>
