@@ -83,8 +83,10 @@
         const userName = createUserNameInput.val().trim();
         console.log(userName);
         // Do we want to validate here?
-        $.post("/api/users", userName).then(function (result) {
+        $.post("/api/users", { userName }).then(function (result) {
             // If this is successful do we log them in?
+            // Probably want to use location.href instead of location.replace
+            // replace breaks history, can't use the back button to go back
             window.location.replace("/users/" + userName);
         }).catch(function (err) {
             // Error catch here.
