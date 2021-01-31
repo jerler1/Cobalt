@@ -14,6 +14,7 @@
     <div class="control">
         <input id="createUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
     </div>
+    <p class="help">Between 1 and 50 characters. Alphanumeric only.</p>
 </div>
 
 <div class="field is-grouped creatingUser is-hidden">
@@ -21,7 +22,7 @@
         <button id="createUserSubmit" class="button">Submit</button>
     </div>
     <div class="control">
-        <button id="makeLogInForm" class="button">Log In</button>
+        <button id="makeLoginForm" class="button">Log In</button>
     </div>
 </div>
 
@@ -49,22 +50,40 @@
     const logInUser = $(".logInUser");
 
     const userNameInput = $("#createUserNameInput");
-    const createUserSubmit = $("#createUserSubmit");
-    const makeLogInForm = $("makeLogInForm");
     const logInUserNameInput = $("#logInUserNameInput");
+    const createUserSubmit = $("#createUserSubmit");
     const logInUserSubmit = $("#logInUserSubmit");
+    const makeLoginForm = $("#makeLoginForm");
     const makeCreateForm = $("#makeCreateForm");
     // Functions.
-    function transitionForm() {
-        initialButton.addClass("is-hidden");
-        if (this.dataset.type === "create") {
-            creatingUser.removeClass("is-hidden");
+    function transitionForm(e, input) {
+        e.preventDefault();
+        if (input === undefined) {
+            initialButton.addClass("is-hidden");
+            if (this.dataset.type === "create") {
+                creatingUser.removeClass("is-hidden");
+            } else {
+                logInUser.removeClass("is-hidden");
+            }
         } else {
-            logInUser.removeClass("is-hidden");
+            if (input === "login") {
+                logInUser.removeClass("is-hidden");
+                creatingUser.addClass("is-hidden");
+            } else {
+                logInUser.addClass("is-hidden");
+                creatingUser.removeClass("is-hidden");
+            }
         }
-        console.log(this.dataset.type);
+
     }
     // Event Handlers.
     initialButton.on("click", transitionForm)
-
+    makeLoginForm.on("click", (e) => {
+        const input = "login";
+        transitionForm(e, input);
+    })
+    makeCreateForm.on("click", (e) => {
+        const input = "create";
+        transitionForm(e, input);
+    })
 </script>
