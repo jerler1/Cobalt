@@ -58,18 +58,20 @@ router.get('/api/drawings/:id', async (req, res) => {
 });
 
 router.post('/api/drawings', async (req, res) => {
-  const { name, link, user_id } = req.body;
+  const { name, link, userId } = req.body;
   const newDrawing = {
     name,
     link,
-    user_id,
+    UserId: userId,
   };
 
   try {
-    const result = await db.Drawing.create(newDrawing);
+    const drawing = await db.Drawing.create(newDrawing);
     // should probably check the result.
-    res.json({
-      status: 'ok',
+    res.status(201).json({
+      error: false,
+      message: 'Drawing created.',
+      drawing,
     });
   } catch (error) {
     console.error(error);
