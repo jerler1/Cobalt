@@ -18,7 +18,11 @@ router.get('/users', async (req, res) => {
 router.get('/users/:name', async (req, res) => {
   try {
     const user = await db.User.findOne({ where: { userName: req.params.name }, include: db.Drawing });
-    res.render('single-artist', { user });
+    if (user != null) {
+      res.render('single-artist', { user });
+    } else {
+      res.status(404).render('not-found');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send('Something went wrong!');
