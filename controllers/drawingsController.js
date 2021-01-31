@@ -22,7 +22,11 @@ router.get('/drawings/new', async (req, res) => {
 router.get('/drawings/:id/edit', async (req, res) => {
   try {
     const drawing = await db.Drawing.findOne({ where: { id: req.params.id } });
-    res.render('edit-artwork', { drawing });
+    if (drawing != null) {
+      res.render('edit-artwork', { drawing });
+    } else {
+      res.status(404).render('not-found');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send('Something went wrong!');
