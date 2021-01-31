@@ -3,9 +3,7 @@ import DrawingElement from './DrawingElement.js';
 const toolbar = document.querySelector('.toolbar');
 const colorInput = document.querySelector('#color');
 const c = document.querySelector('canvas#main');
-const cBackground = document.querySelector('canvas#background');
 const ctx = c.getContext('2d');
-const backgroundCtx = cBackground.getContext('2d');
 
 let startX = 0;
 let startY = 0;
@@ -14,8 +12,6 @@ ctx.lineWidth = 5;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.globalCompositeOperation = 'source-over'
-
-backgroundCtx.setLineDash([5, 5]);
 
 let isDrawing = false;
 let tool = 'line';
@@ -60,23 +56,29 @@ c.addEventListener('touchstart', (e) => {
 
 function onMouseMove(e) {
   if (isDrawing) {
+    let x = e.offsetX;
+    let y = e.offsetY;
+
+    ctx.clearRect(0, 0, c.width, c.height);
+    drawPaths(paths);
+    ctx.save();
     if (tool == 'square') {
-      backgroundCtx.clearRect(0, 0, cBackground.width, cBackground.height);
-      backgroundCtx.strokeRect(startX, startY, e.offsetX - startX, e.offsetY - startY);
+      ctx.setLineDash([5, 5]);
+      ctx.lineWidth = 1;
+      ctx.strokeRect(startX, startY, x - startX, y - startY);
     } else if (tool == 'line') {
-      backgroundCtx.clearRect(0, 0, cBackground.width, cBackground.height);
-      backgroundCtx.beginPath();
-      backgroundCtx.moveTo(startX, startY);
-      backgroundCtx.lineTo(e.offsetX, e.offsetY);
-      backgroundCtx.stroke();
-      // backgroundCtx.closePath();
+      ctx.setLineDash([5, 5]);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
     } else {
-      let x = e.offsetX;
-      let y = e.offsetY;
       currentPath.push([x, y]);
       ctx.lineTo(x, y);
       ctx.stroke();
     }
+    ctx.restore();
   }
 }
 
@@ -99,7 +101,6 @@ function onMouseUp(e) {
 }
 
 function drawPaths(paths) {
-  backgroundCtx.clearRect(0, 0, cBackground.width, cBackground.height);
   ctx.clearRect(0, 0, c.width, c.height)
   paths.forEach(el => {
     ctx.save();
