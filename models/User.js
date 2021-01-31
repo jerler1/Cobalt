@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
   User.associate = function (models) {
     // Associating User with Drawings.
     // When a user is deleted, delete all their drawings.
-    Author.hasMany(models.Drawing, {
+    User.hasMany(models.Drawing, {
       onDelete: "cascade",
     });
   };

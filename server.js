@@ -6,7 +6,8 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const app = express();
 const db = require("./models");
-const TrainsController = require("./controllers/trainsController");
+const usersController = require('./controllers/usersController');
+const drawingsController = require('./controllers/drawingsController');
 
 const PORT = process.env.PORT || 8080;
 
@@ -32,7 +33,8 @@ app.get("/api/config", (req, res) => {
   });
 });
 
-app.use(TrainsController);
+app.use(usersController);
+app.use(drawingsController);
 
 db.sequelize
   .sync()
