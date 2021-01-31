@@ -1,10 +1,10 @@
 {{!-- Leaving the width of the container for the stylist of the page --}}
 {{!-- Needs Styling --}}
-<h1>Welcome to Cobalt</h1>
-<button class="button is-primary initialCreateButton">
+<h1 class="initialButton">Welcome to Cobalt</h1>
+<button class="button is-primary initialButton" data-type="create">
     <strong>Create</strong>
 </button>
-<button class="button is-primary initialLogInButton">
+<button class="button is-primary initialButton" data-type="login">
     <strong>Log In</strong>
 </button>
 
@@ -43,8 +43,8 @@
 </div>
 
 <script type="text/javascript">
-    const initialCreateButton = $(".initialCreateButton");
-    const initialLogInButton = $(".initialLogInButton");
+    // DOM Variables.
+    const initialButton = $(".initialButton");
     const creatingUser = $(".creatingUser");
     const logInUser = $(".logInUser");
 
@@ -54,6 +54,17 @@
     const logInUserNameInput = $("#logInUserNameInput");
     const logInUserSubmit = $("#logInUserSubmit");
     const makeCreateForm = $("#makeCreateForm");
-    
+    // Functions.
+    function transitionForm() {
+        initialButton.addClass("is-hidden");
+        if (this.dataset.type === "create") {
+            creatingUser.removeClass("is-hidden");
+        } else {
+            logInUser.removeClass("is-hidden");
+        }
+        console.log(this.dataset.type);
+    }
+    // Event Handlers.
+    initialButton.on("click", transitionForm)
 
 </script>
