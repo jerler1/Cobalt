@@ -54,9 +54,9 @@ router.get('/api/users/:id', async (req, res) => {
 });
 
 router.post('/api/users', async (req, res) => {
-  const { username } = req.body;
+  const { userName } = req.body;
   const newUser = {
-    username,
+    userName,
   };
 
   try {
