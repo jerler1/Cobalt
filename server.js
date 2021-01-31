@@ -9,6 +9,10 @@ const db = require("./models");
 const usersController = require("./controllers/usersController");
 const drawingsController = require("./controllers/drawingsController");
 
+// Session variables.
+const session = require("express-session");
+const MySQLStore = require("express-mysql-session")(session)
+
 const PORT = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +39,7 @@ app.get("/api/config", (req, res) => {
 
 app.use(usersController);
 app.use(drawingsController);
+app.use(session({ secret: "canvas", resave: false, saveUninitialized: false }));
 
 db.sequelize
   .sync()
