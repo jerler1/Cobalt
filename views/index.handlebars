@@ -49,7 +49,7 @@
     const creatingUser = $(".creatingUser");
     const logInUser = $(".logInUser");
 
-    const userNameInput = $("#createUserNameInput");
+    const createUserNameInput = $("#createUserNameInput");
     const logInUserNameInput = $("#logInUserNameInput");
     const createUserSubmit = $("#createUserSubmit");
     const logInUserSubmit = $("#logInUserSubmit");
@@ -76,6 +76,19 @@
         }
 
     }
+    // Not working.
+    function createUser(e) {
+        e.preventDefault();
+        const userName = createUserNameInput.val().trim();
+        console.log(userName);
+        // Do we want to validate here?
+        $.post("/api/users", userName).then(function (result) {
+            // If this is successful do we log them in?
+            window.location.replace("/users/" + userName);
+        }).catch(function (err) {
+            // Error catch here.
+        })
+    }
     // Event Handlers.
     initialButton.on("click", transitionForm)
     makeLoginForm.on("click", (e) => {
@@ -86,4 +99,6 @@
         const input = "create";
         transitionForm(e, input);
     })
+    createUserSubmit.on("click", createUser)
 </script>
+
