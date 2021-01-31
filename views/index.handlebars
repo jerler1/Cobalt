@@ -83,7 +83,7 @@
         console.log(userName);
         // Do we want to validate here?
         $.post("/api/users", { userName }).then(function (result) {
-            location.href("/users/" + userName);
+            location.href = "/users/" + userName;
         }).catch(function (err) {
             // Error catch here.
         })
