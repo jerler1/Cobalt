@@ -6,8 +6,8 @@ const {
 } = require("@handlebars/allow-prototype-access");
 const app = express();
 const db = require("./models");
-const usersController = require('./controllers/usersController');
-const drawingsController = require('./controllers/drawingsController');
+const usersController = require("./controllers/usersController");
+const drawingsController = require("./controllers/drawingsController");
 
 const PORT = process.env.PORT || 8080;
 
