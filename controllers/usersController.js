@@ -54,24 +54,32 @@ router.get('/api/users/:id', async (req, res) => {
 });
 
 router.post('/api/users', async (req, res) => {
-  const { username } = req.body;
+  const { userName } = req.body;
   const newUser = {
-    username,
+    userName,
   };
 
   try {
-    const result = await db.User.create(newUser);
+    const user = await db.User.create(newUser);
     // should probably check the result.
-    res.json({
+    res.status(201).json({
       error: false,
-      message: 'ok',
+      message: 'User created.',
+      user,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({
-      error: true,
-      message: "Couldn't create a new user.",
-    });
+    if (error.original.code === 'ER_DUP_ENTRY') {
+      res.status(400).json({
+        error: true,
+        message: 'That username is already taken.',
+      });
+    } else {
+      res.status(500).json({
+        error: true,
+        message: "Couldn't create a new user.",
+      });
+    }
   }
 });
 
