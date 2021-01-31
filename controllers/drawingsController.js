@@ -99,3 +99,5 @@ router.delete('/api/drawings/:id', async (req, res) => {
     });
   }
 });
+
+module.exports = router;
