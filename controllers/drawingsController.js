@@ -22,7 +22,11 @@ router.get('/drawings/new', async (req, res) => {
 router.get('/drawings/:id/edit', async (req, res) => {
   try {
     const drawing = await db.Drawing.findOne({ where: { id: req.params.id } });
-    res.render('edit-artwork', { drawing });
+    if (drawing != null) {
+      res.render('edit-artwork', { drawing });
+    } else {
+      res.status(404).render('not-found');
+    }
   } catch (error) {
     console.error(error);
     res.status(500).send('Something went wrong!');
@@ -58,18 +62,20 @@ router.get('/api/drawings/:id', async (req, res) => {
 });
 
 router.post('/api/drawings', async (req, res) => {
-  const { name, link, user_id } = req.body;
+  const { name, link, userId } = req.body;
   const newDrawing = {
     name,
     link,
-    user_id,
+    UserId: userId,
   };
 
   try {
-    const result = await db.Drawing.create(newDrawing);
+    const drawing = await db.Drawing.create(newDrawing);
     // should probably check the result.
-    res.json({
-      status: 'ok',
+    res.status(201).json({
+      error: false,
+      message: 'Drawing created.',
+      drawing,
     });
   } catch (error) {
     console.error(error);
