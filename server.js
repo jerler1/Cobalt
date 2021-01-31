@@ -1,6 +1,7 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
 const handlebars = require("handlebars");
+const mysql = require("mysql");
 const {
   allowInsecurePrototypeAccess,
 } = require("@handlebars/allow-prototype-access");
@@ -12,6 +13,17 @@ const drawingsController = require("./controllers/drawingsController");
 // Session variables.
 const session = require("express-session");
 const MySQLStore = require("express-mysql-session")(session)
+
+const options = {
+  host: "localhost",
+  port: 8080,
+  user: "root",
+  password: "kitty1",
+  database: "cobaltCanvasDB"
+}
+
+app.use(session({ secret: "canvas", resave: false, saveUninitialized: false }));
+const connection = mysql.createConnection(options);
 
 const PORT = process.env.PORT || 8080;
 
@@ -39,7 +51,6 @@ app.get("/api/config", (req, res) => {
 
 app.use(usersController);
 app.use(drawingsController);
-app.use(session({ secret: "canvas", resave: false, saveUninitialized: false }));
 
 db.sequelize
   .sync()
