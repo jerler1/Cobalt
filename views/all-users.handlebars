@@ -1,0 +1,11 @@
+{{> header }}
+
+<h1>Contributors</h1>
+
+<ul>
+    {{#each users}}
+    <li>
+        <a href="/user/'{{this.user}}'">{{this.user}}</a>
+    </li>
+    {{/each}}
+</ul>
