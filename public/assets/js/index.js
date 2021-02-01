@@ -40,7 +40,18 @@ $(document).ready(function () {
         location.href = "/users/" + userName;
       })
       .catch(function (err) {
-        // Error catch here.
+        console.error(err);
+      });
+  }
+  function loginUser(e) {
+    e.preventDefault();
+    const userName = logInUserNameInput.val();
+    $.post("/login", { userName })
+      .then(function () {
+        location.href = "/users/" + userName;
+      })
+      .catch(function (err) {
+        console.error(err);
       });
   }
   // Event Handlers.
@@ -54,4 +65,5 @@ $(document).ready(function () {
     transitionForm(e, input);
   });
   createUserSubmit.on("click", createUser);
+  logInUserSubmit.on("click", loginUser);
 });
