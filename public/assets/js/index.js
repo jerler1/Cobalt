@@ -70,10 +70,10 @@ $(document).ready(function () {
     if (event.keyCode === 13) {
       createUserSubmit.click();
     }
-    logInUserNameInput.keyup(function (event) {
-      if (event.keyCode === 13) {
-        logInUserSubmit.click();
-      }
-    });
+  });
+  logInUserNameInput.keyup(function (event) {
+    if (event.keyCode === 13) {
+      logInUserSubmit.click();
+    }
   });
 });
