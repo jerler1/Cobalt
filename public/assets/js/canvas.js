@@ -33,7 +33,9 @@ toolbar.addEventListener('click', (e) => {
   if (e.target.matches('#save')) {
     const pathData = JSON.stringify(paths);
     const drawingName = document.querySelector('#drawingName').value;
-    $.post("/api/drawings", { name: drawingName, link: pathData, userId: 1 }).then(response => {
+    const userId = e.target.getAttribute('data-userid');
+    const link  = c.toDataURL();
+    $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
       console.log(response);
     }).catch((error) => {
       // TODO: actually handle the error.
