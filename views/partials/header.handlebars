@@ -5,7 +5,7 @@
         <div class="columns">
             <div class="column">
                 <p class="title">
-                    Cobalt Canvas
+                    <a href="/">Cobalt Canvas</a>
                 </p>
             </div>
             <div class="column">
@@ -19,12 +19,12 @@
     <nav>
         <div class="nav-wrapper">
             <div class="columns">
-                <div class="column">
-                    <a class="button is-link is-light">
+                <div class="column is-4">
+                    <a href="/drawing" class="button is-link is-light">
                         <strong>Cobalt Art Gallery</strong>
                     </a>
                 </div>
-                <div class="column">
+                <div class="column is-4">
                     <div class="field is-grouped">
                         <p class="control is-expanded">
                             <input class="input" type="text" placeholder="Find artwork or artist">
@@ -36,13 +36,17 @@
                         </p>
                     </div>
                 </div>
-                <div class="column">
-                    <a class="button is-link is-light">
-                        <strong>All User View</strong>
+                {{#if username}}
+                <div class="column is-4">
+                    <a href="/users/{{username}}" class="button is-link is-light">
+                        <strong>My Drawings</strong>
                     </a>
                 </div>
+                {{/if}}
             </div>
         </div>
     </nav>
-
 </header>
+
+
+<script type="module" src="/assets/js/header.js"></script>

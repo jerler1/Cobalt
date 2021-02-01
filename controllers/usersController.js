@@ -6,9 +6,10 @@ const router = express.Router();
 //  VIEW ROUTES
 
 router.get("/users", async (req, res) => {
+  console.log(req.session.user);
   try {
     const users = await db.User.findAll();
-    res.render("all-users", { users });
+    res.render("all-users", { users, username: req.session.user && req.session.user.userName });
   } catch (error) {
     console.error(error);
     res.status(500).send("Something went wrong!");
