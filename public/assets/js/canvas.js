@@ -1,6 +1,7 @@
 import DrawingElement from './DrawingElement.js';
 
 const toolbar = document.querySelector('.toolbar');
+const ownerControls = document.querySelector('.owner-controls');
 const colorInput = document.querySelector('#color');
 const c = document.querySelector('canvas#main');
 const ctx = c.getContext('2d');
@@ -28,6 +29,39 @@ if (paths.length != 0) {
 colorInput.addEventListener('input', (e) => {
   ctx.strokeStyle = e.target.value;
 });
+
+if (ownerControls != null) {
+  const drawingId = ownerControls.getAttribute('data-drawingid');
+  const userId = ownerControls.getAttribute('data-userid');
+  ownerControls.addEventListener('click', (e) => {
+    if (e.target.matches('#owner-save')) {
+      const pathData = JSON.stringify(paths);
+      const drawingName = document.querySelector('#drawingName').value;
+      const link  = c.toDataURL();
+      $.ajax(`/api/drawings/${drawingId}`, {
+        method: 'PUT',
+        contentType: 'application/json',
+        data: JSON.stringify({ name: drawingName, link, data: pathData, userId }),
+      }).then(response => {
+        console.log(response);
+      }).catch((error) => {
+        // TODO: Actually handle any error.
+      });
+    } else if (e.target.matches('#owner-delete')) {
+      const willDelete = confirm("Are you sure? This can't be undone!");
+      if (willDelete) {
+        $.ajax(`/api/drawings/${drawingId}`, {
+          method: 'DELETE'
+        }).then((response) => {
+          // Temporary. Where should we actually navigate to?
+          location.href = '/';
+        }).catch((error) => {
+          // TODO: Actually handle any error.
+        });
+      }
+    }
+  });
+}
 
 toolbar.addEventListener('click', (e) => {
   if (e.target.matches('#save')) {
