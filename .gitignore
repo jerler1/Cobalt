@@ -108,3 +108,5 @@ dist
 
 # Ignoring config.json
 /config/config.json
+
+server.js
