@@ -48,7 +48,17 @@ if (ownerControls != null) {
         // TODO: Actually handle any error.
       });
     } else if (e.target.matches('#owner-delete')) {
-      console.log('owner delete clicked');
+      const willDelete = confirm("Are you sure? This can't be undone!");
+      if (willDelete) {
+        $.ajax(`/api/drawings/${drawingId}`, {
+          method: 'DELETE'
+        }).then((response) => {
+          // Temporary. Where should we actually navigate to?
+          location.href = '/';
+        }).catch((error) => {
+          // TODO: Actually handle any error.
+        });
+      }
     }
   });
 }
