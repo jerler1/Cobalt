@@ -96,8 +96,29 @@ router.post('/api/drawings', async (req, res) => {
   }
 });
 
-router.post('/api/drawings/:id', async (req, res) => {
-  // does this route make sense to include?
+router.put('/api/drawings/:id', async (req, res) => {
+  const { name, link, data, userId } = req.body;
+  const updatedDrawing = {
+    name,
+    link,
+    data,
+    UserId: userId,
+  };
+
+  try {
+    const drawing = await db.Drawing.update(updatedDrawing, { where: { id: req.params.id }});
+    res.json({
+      error: false,
+      message: 'Drawing updated.',
+      drawing,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      error: true,
+      message: "Couldn't update the drawing.",
+    });
+  }
 });
 
 router.delete('/api/drawings/:id', async (req, res) => {

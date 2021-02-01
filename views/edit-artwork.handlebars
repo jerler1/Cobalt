@@ -3,14 +3,17 @@
 <div class="container">
   <h1>Edit Artwork</h1>
   {{#if owner }}
-    <button>Delete</button>
+    <div class="owner-controls" data-userid="{{ user.id }}" data-drawingid="{{ drawing.id }}">
+      <button id="owner-delete">Delete</button>
+      <button id="owner-save">Update</button>
+    </div>
   {{/if}}
   <div class="toolbar">
     <input class="button" type="color" name="color" id="color" />
     <button class="button" data-tool="line">line</button>
     <button class="button" data-tool="square">square</button>
     <button class="button" data-tool="pen">pen</button>
-    <button class="button" id="save" data-userid="{{ user.id }}">Save</button>
+    <button class="button" id="save" data-userid="{{ user.id }}">Save New</button>
     <button class="button" id="undo">Undo</button>
     <button class="button" id="redo">Redo</button>
   </div>
