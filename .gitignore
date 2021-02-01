@@ -107,6 +107,4 @@ dist
 .tern-port
 
 # Ignoring config.json
-/config/config.json
-
-server.js
+config/config.json
