@@ -66,4 +66,14 @@ $(document).ready(function () {
   });
   createUserSubmit.on("click", createUser);
   logInUserSubmit.on("click", loginUser);
+  createUserNameInput.keyup(function (event) {
+    if (event.keyCode === 13) {
+      createUserSubmit.click();
+    }
+    logInUserNameInput.keyup(function (event) {
+      if (event.keyCode === 13) {
+        logInUserSubmit.click();
+      }
+    });
+  });
 });
