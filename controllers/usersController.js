@@ -58,6 +58,7 @@ router.get('/api/users/:id', async (req, res) => {
 });
 
 router.post('/api/users', async (req, res) => {
+  console.log(req.session);
   const { userName } = req.body;
   const newUser = {
     userName,
@@ -65,6 +66,8 @@ router.post('/api/users', async (req, res) => {
 
   try {
     const user = await db.User.create(newUser);
+    req.session.userName = userName;
+    console.log(req.session.userName);
     // should probably check the result.
     res.status(201).json({
       error: false,
