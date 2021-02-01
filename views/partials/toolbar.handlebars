@@ -1,8 +1,12 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
- <script src="https://kit.fontawesome.com/7be56c464b.js" crossorigin="anonymous"></script>
-
-<button type="button" style="width: 5%; height: 3%; align-content: center;" class="collapsible fas fa-toolbox "></button>
-<div class="icon-bar content">
+<div class="icon-bar">
+  <button href="#"><i class="fas fa-share-alt"></i></button> 
+  <button href="#"><i class="fas fa-save"></i></button> 
+  <button href="#"><i class="fas fa-file-plus"></i></button> 
+  <button href="#"><i class="fas fa-undo-alt"></i></button>
+  <button href="#"><i class="fas fa-redo-alt"></i></button> 
+  <button href="#"><i class="fas fa-trash-alt"></i></button> 
+  <button href="#"><i class="fas fa-edit"></i></button> 
+  <button href="#"><i class="fas fa-window-close"></i></button>
   <button href="#"><i class="fas fa-eraser"></i></button> 
   <button href="#"><i class="fad fa-eye-dropper"></i></button> 
   <button href="#"><i class="fas fa-pen-fancy"></i></button> 
@@ -14,20 +18,7 @@
   <button href="#"><i class="fas fa-palette"></i></button> 
   <button href="#"><i class="fas fa-fill-drip"></i></button> 
   <button href="#"><i class="fas fa-draw-circle"></i></button> 
-  <button href="#"><i class="fas fa-draw-square"></i></button>
+  <button href="#"><i class="fas fa-draw-square"></i></button> 
 </div>
-    
-<script>var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}</script>
+<script type="module" src="/assets/js/canvas.js"></script>
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css" />
