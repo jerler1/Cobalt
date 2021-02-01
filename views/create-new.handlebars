@@ -1,1 +1,20 @@
-<h1>Create New Artwork</h1>
+{{> header}}
+
+<div class="container">
+  <h1>Create New Artwork</h1>
+  <div class="toolbar">
+    <input class="button" type="color" name="color" id="color" />
+    <button class="button" data-tool="line">line</button>
+    <button class="button" data-tool="square">square</button>
+    <button class="button" data-tool="pen">pen</button>
+    <button class="button" id="save">Save</button>
+    <button class="button" id="undo">Undo</button>
+    <button class="button" id="redo">Redo</button>
+  </div>
+  <div id="drawing-area" style="position: absolute;">
+    <canvas id="main" width="500" height="500"
+      style="border: 1px solid black; position: absolute; left: 0; top: 0;"></canvas>
+  </div>
+</div>
+
+<script type="module" src="/assets/js/canvas.js"></script>

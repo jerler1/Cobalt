@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const exphbs = require("express-handlebars");
 const handlebars = require("handlebars");
@@ -51,6 +52,8 @@ const PORT = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(express.static('public'));
 
 app.engine(
   "handlebars",
