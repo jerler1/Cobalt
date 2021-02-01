@@ -108,4 +108,22 @@ router.delete('/api/users/:id', async (req, res) => {
   }
 });
 
+//  OTHER ROUTES
+router.post('/login', async (req, res) => {
+  const { userName } = req.body;
+
+  const user = await db.User.findOne({ where: { userName } });
+
+  if (user != null) {
+    // setUp the user sessions and redirect to their page.
+    res.redirect(`/users/${userName}`);
+  } else {
+    // couldn't find that username so send back a 400? status
+    res.status(400).json({
+      error: true,
+      message: "Couldn't find that username."
+    });
+  }
+});
+
 module.exports = router;
