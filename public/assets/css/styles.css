@@ -37,8 +37,7 @@
   text-align: center !important; 
   font-size: 36px;
   color: #0206B2;
-  
-  }
+  };
    
   
   
@@ -55,15 +54,13 @@
     outline: none;
     font-size: 60px;
   }
-  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */.active, .collapsible:hover {
     /*  background-color: #ccc;*/
     }
     
     /* Style the collapsible content. Note: hidden by default */
-    .content {
+.content {
       padding: 0 8px;
       display: none;
       overflow: hidden;
-    /*  background-color: #f1f1f1;*/
-    }
+};
