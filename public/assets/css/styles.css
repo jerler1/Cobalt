@@ -3,42 +3,37 @@
   background-color: #FEAE00;
   border-radius: 25px;
 }
-.icon-bar a {
-  display: block;
-  text-align: center !important;
-  padding: 6px;
-  transition: all 0.3s ease;
-  color: #0206B2;
-  font-size: 36px;
-  border-radius: 25px;
+.icon-bar button:hover {
+border-color:#000;
+border-top-left-radius:2em;
+border-top-right-radius:2em;
+border-bottom-left-radius:2em;
+border-bottom-right-radius:2em;
+background-color: #0096C7;
 }
-.icon-bar a:hover {
-    border-color:#000;
-    border-top-left-radius:2em;
-    border-top-right-radius:2em;
-    border-bottom-left-radius:2em;
-    border-bottom-right-radius:2em;
-  background-color: #0096C7;
-}
-.icon-bar a:focus {
+.icon-bar button:focus {
   background-color: #0096C7;
     outline: 0;
 }    
-a:visited {
+button:visited {
   color: #0206B2;
 }
-a:active {
+
+button:active {
   color: #0096C7;
 }
 button{
 text-align: center !important; 
 font-size: 36px;
 color: #FEAE00;
-text-align: center !important;
-padding: 6px;
+/*padding: 6px;*/
 transition: all 0.3s ease;
-border-radius: 25px;
-background-color: #0206B2;
+font-size: 30px;
+/* border-radius: 10px; */
+background-color: #06065C;
+align-content: center !important;
+width: 100%;
+height: 100%;
 }
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
@@ -47,13 +42,11 @@ background-color: #0206B2;
   background-color: #03045C;
   cursor: pointer;
   padding: 8px;
-/*  width: 100%;*/
   border: none;
   text-align: left;
   outline: none;
-  font-size: 60px;
+  font-size: 50px;
 }
-
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
 .active, .collapsible:hover {
 /*  background-color: #ccc;*/
@@ -66,10 +59,3 @@ background-color: #0206B2;
   overflow: hidden;
 /*  background-color: #f1f1f1;*/
 }
-    
-    /* Style the collapsible content. Note: hidden by default */
-.content {
-      padding: 0 8px;
-      display: none;
-      overflow: hidden;
-};
