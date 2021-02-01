@@ -4,11 +4,11 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isAlphanumeric: true,
-        len: [1, 30],
+        len: [1, 50],
       },
     },
     link: { type: DataTypes.TEXT, allowNull: false },
+    data: { type: DataTypes.TEXT, allowNull: false },
   });
 
   Drawing.associate = function (models) {

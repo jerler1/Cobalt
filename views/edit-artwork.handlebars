@@ -1,21 +1,27 @@
-<h1>Edit Artwork</h1>
-<button type="button" class="collapsible fas fa-toolbox "></button>
+{{> header}}
 
-<div class="icon-bar content">
-
-  <a href="#"><i role="button" class="button fas fa-eraser"></i></a> 
-  <a href="#"><i role="button" class="button fad fa-eye-dropper"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-pen-fancy"></i></a> 
-  <a href="#"><i role="button" class="button fad fa-pencil-alt"></i></a>
-  <a href="#"><i role="button" class="button fas fa-paint-brush-alt"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-highlighter"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-brush"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-paint-roller"></i></a>
-  <a href="#"><i role="button" class="button fas fa-palette"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-fill-drip"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-draw-circle"></i></a> 
-  <a href="#"><i role="button" class="button fas fa-draw-square"></i></a>
+<div class="container">
+  <h1>Edit Artwork</h1>
+  {{#if owner }}
+    <button>Delete</button>
+  {{/if}}
+  <div class="toolbar">
+    <input class="button" type="color" name="color" id="color" />
+    <button class="button" data-tool="line">line</button>
+    <button class="button" data-tool="square">square</button>
+    <button class="button" data-tool="pen">pen</button>
+    <button class="button" id="save" data-userid="{{ user.id }}">Save</button>
+    <button class="button" id="undo">Undo</button>
+    <button class="button" id="redo">Redo</button>
+  </div>
+  <div>
+    <label for="drawingName">Name:</label>
+    <input type="text" id="drawingName" name="drawingName" value="{{ drawing.name }}">
+  </div>
+  <div id="drawing-area" style="position: absolute;">
+    <canvas id="main" width="500" height="500" data-paths="{{ drawing.data }}"
+      style="border: 1px solid black; position: absolute; left: 0; top: 0;"></canvas>
+  </div>
 </div>
 
 <script type="module" src="/assets/js/canvas.js"></script>
-<link rel="stylesheet" href="/assets/css/styles.css" type="text/css" />

@@ -2,14 +2,21 @@
 
 <div class="container">
   <h1>Create New Artwork</h1>
+  {{#if user }}
+    <h2>{{ user.userName }}</h2>
+  {{/if}}
   <div class="toolbar">
     <input class="button" type="color" name="color" id="color" />
     <button class="button" data-tool="line">line</button>
     <button class="button" data-tool="square">square</button>
     <button class="button" data-tool="pen">pen</button>
-    <button class="button" id="save">Save</button>
+    <button class="button" id="save" data-userid="{{ user.id }}">Save</button>
     <button class="button" id="undo">Undo</button>
     <button class="button" id="redo">Redo</button>
+  </div>
+  <div>
+    <label for="drawingName">Name:</label>
+    <input type="text" id="drawingName" name="drawingName" value="Untitled drawing">
   </div>
   <div id="drawing-area" style="position: absolute;">
     <canvas id="main" width="500" height="500"

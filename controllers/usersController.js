@@ -72,8 +72,8 @@ router.post("/api/users", async (req, res) => {
 
   try {
     const user = await db.User.create(newUser);
-    req.session.userName = userName;
-    console.log(req.session.userName);
+    req.session.user = user;
+    console.log(req.session.user);
     // should probably check the result.
     res.status(201).json({
       error: false,
@@ -125,7 +125,7 @@ router.post("/login", async (req, res) => {
 
   if (user != null) {
     // setUp the user sessions and redirect to their page.
-    req.session.userName = { userName };
+    req.session.user = user;
     res.redirect(`/users/${userName}`);
   } else {
     // couldn't find that username so send back a 400? status

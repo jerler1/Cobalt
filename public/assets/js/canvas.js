@@ -17,8 +17,13 @@ let isDrawing = false;
 let tool = 'line';
 let currentPath = null;
 
-const paths = [];
+let paths = JSON.parse(c.getAttribute('data-paths')) || [];
 const history = [];
+
+if (paths.length != 0) {
+  paths = paths.map(p => new DrawingElement(p.type, p.color, p.paths));
+  drawPaths(paths);
+}
 
 colorInput.addEventListener('input', (e) => {
   ctx.strokeStyle = e.target.value;
@@ -26,9 +31,15 @@ colorInput.addEventListener('input', (e) => {
 
 toolbar.addEventListener('click', (e) => {
   if (e.target.matches('#save')) {
-    const dataUrl = c.toDataURL();
-    console.log(dataUrl);
-    console.log(dataUrl.length);
+    const pathData = JSON.stringify(paths);
+    const drawingName = document.querySelector('#drawingName').value;
+    const userId = e.target.getAttribute('data-userid');
+    const link  = c.toDataURL();
+    $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
+      console.log(response);
+    }).catch((error) => {
+      // TODO: actually handle the error.
+    });
   } else if (e.target.matches('#undo')) {
     if (paths.length == 0) {
       return;
