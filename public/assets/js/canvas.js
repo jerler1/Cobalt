@@ -100,13 +100,15 @@ function onMouseDown(e) {
 }
 
 function onMouseUp(e) {
-  isDrawing = false;
-  let endX = e.offsetX;
-  let endY = e.offsetY;
-  currentPath.push([endX, endY]);
-  paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath));
-  currentPath = null;
-  drawPaths(paths);
+  if (isDrawing) {
+    isDrawing = false;
+    let endX = e.offsetX;
+    let endY = e.offsetY;
+    currentPath.push([endX, endY]);
+    paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath));
+    currentPath = null;
+    drawPaths(paths);
+  }
 }
 
 function drawPaths(paths) {
