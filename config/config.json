@@ -1,7 +1,7 @@
 {
   "old": {
     "username": "root",
-    "password": "kitty21",
+    "password": "Password12",
     "database": "cobaltCanvasDB",
     "host": "127.0.0.1",
     "dialect": "mysql"
