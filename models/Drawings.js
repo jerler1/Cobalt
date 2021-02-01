@@ -7,8 +7,8 @@ module.exports = function (sequelize, DataTypes) {
         len: [1, 50],
       },
     },
-    link: { type: DataTypes.TEXT, allowNull: false },
-    data: { type: DataTypes.TEXT, allowNull: false },
+    link: { type: DataTypes.TEXT('medium'), allowNull: false },
+    data: { type: DataTypes.TEXT('medium'), allowNull: false },
   });
 
   Drawing.associate = function (models) {
