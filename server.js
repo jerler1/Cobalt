@@ -16,10 +16,10 @@ const MySQLStore = require("express-mysql-session")(session);
 
 const options = {
   host: "localhost",
-  port: 8080,
-  user: "root",
+  port: 3306,
+  user: "session_test",
   password: "kitty1",
-  database: "cobaltCanvasDB",
+  database: "session_test",
 };
 const sessionOptions = {
   host: "localhost",
@@ -37,16 +37,15 @@ const sessionOptions = {
   schema: {
     tableName: "sessions",
     columnNames: {
-      sessionId: "sessionId",
+      session_id: "session_id",
       expires: "expires",
       data: "data",
     },
   },
 };
 
-app.use(session({ secret: "canvas", resave: false, saveUninitialized: false }));
-const connection = mysql.createConnection(options);
-const sessionStore = new MySQLStore(sessionOptions, connection);
+const sessionStore = new MySQLStore(options);
+app.use(session({ secret: "canvas", resave: false, store:sessionStore, saveUninitialized: false }));
 
 const PORT = process.env.PORT || 8080;
 
