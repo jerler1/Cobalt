@@ -1,24 +1,22 @@
 <header class="hero is-link">
     <div class="hero-body">
-        {{!-- <a href="/" class="brand-logo">Colbalt Canvas</a> --}}
-        <div class="columns">
-            <div class="column">
+        <div class="columns is-vcentered">
+            <div class="column is-3">
                 <p class="title">
-                    <a href="/"><img src="/assets/images/logow.png" alt="cobalt logo" class="logo">Cobalt
-                        Canvas</a>
+                    <a href="/"><img src="/assets/images/logow.png" alt="cobalt logo" class="logo"></a>
                 </p>
             </div>
-            <div class="column">
-                <p class="subtitle">
+            <div class="column is-6">
+                <p class="subtitle is-size-1 has-text-weight-bold is-family-sans-serif">
                     Create and Collaborate
                 </p>
             </div>
         </div>
     </div>
-
-    <nav>
+    {{#if username}}
+    <nav class="navbar is-info">
         <div class="nav-wrapper">
-            <div class="columns">
+            <div class="columns is-vcentered ">
                 <div class="column is-4">
                     <a href="/drawing" class="button is-link is-light">
                         <strong>Cobalt Art Gallery</strong>
@@ -36,16 +34,15 @@
                         </p>
                     </div>
                 </div>
-                {{#if username}}
                 <div class="column is-4">
                     <a href="/users/{{username}}" class="button is-link is-light">
                         <strong>My Drawings</strong>
                     </a>
                 </div>
-                {{/if}}
             </div>
         </div>
     </nav>
+    {{/if}}
 </header>
 
 

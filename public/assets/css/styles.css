@@ -3,6 +3,20 @@
 .hero-body {
     background-image: url("../images/navbg.png");
 }
+.logo {
+    width: 100%;
+}
+html {
+  height: 100%;
+}
+.landingPageBG {
+  background-image: url("../images/main.png");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100%;
+}
+
 
 /* =============================== */
 body {

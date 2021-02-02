@@ -1,47 +1,54 @@
 {{!-- Leaving the width of the container for the stylist of the page --}}
 {{!-- Needs Styling --}}
 {{> header }}
-<h1 class="initialButton">Welcome to Cobalt</h1>
-<button class="button is-primary initialButton" data-type="create">
-    <strong>Create</strong>
-</button>
-<button class="button is-primary initialButton" data-type="login">
-    <strong>Log In</strong>
-</button>
+<div class="columns is-vcentered landingPageBG">
+    <div class="column is-9"></div>
+    <div class="column is-3">
+        <h1 class="initialButton">Welcome to Cobalt</h1>
+        <button class="button is-primary initialButton" data-type="create">
+            <strong>Create</strong>
+        </button>
+        <button class="button is-primary initialButton" data-type="login">
+            <strong>Log In</strong>
+        </button>
 
-<div class="field creatingUser is-hidden">
-    <h1>Create a new user account.</h1>
-    <label class="label">User Name</label>
-    <div class="control">
-        <input id="createUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
-    </div>
-    <p class="help">Between 1 and 50 characters. Alphanumeric only.</p>
-</div>
+        <div class="field creatingUser is-hidden">
+            <h1>Create a new user account.</h1>
+            <label class="label">User Name</label>
+            <div class="control">
+                <input id="createUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
+            </div>
+            <p class="help">Between 1 and 50 characters. Alphanumeric only.</p>
+        </div>
 
-<div class="field is-grouped creatingUser is-hidden">
-    <div class="control">
-        <button id="createUserSubmit" class="button">Submit</button>
-    </div>
-    <div class="control">
-        <button id="makeLoginForm" class="button">Log In</button>
-    </div>
-</div>
+        <div class="field is-grouped creatingUser is-hidden">
+            <div class="control">
+                <button id="createUserSubmit" class="button">Submit</button>
+            </div>
+            <div class="control">
+                <button id="makeLoginForm" class="button">Log In</button>
+            </div>
+        </div>
 
-<div class="field logInUser is-hidden">
-    <h1>Login to your account.</h1>
-    <label class="label">User Name</label>
-    <div class="control">
-        <input id="logInUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
-    </div>
-</div>
+        <div class="field logInUser is-hidden">
+            <h1>Login to your account.</h1>
+            <label class="label">User Name</label>
+            <div class="control">
+                <input id="logInUserNameInput" class="input" type="text" placeholder="Input User Name Here.">
+            </div>
+        </div>
 
-<div class="field is-grouped logInUser is-hidden">
-    <div class="control">
-        <button id="logInUserSubmit" class="button">Submit</button>
+        <div class="field is-grouped logInUser is-hidden">
+            <div class="control">
+                <button id="logInUserSubmit" class="button">Submit</button>
+            </div>
+            <div class="control">
+                <button id="makeCreateForm" class="button makeCreateForm">Create User Name</button>
+            </div>
+        </div>
     </div>
-    <div class="control">
-        <button id="makeCreateForm" class="button makeCreateForm">Create User Name</button>
-    </div>
+
+
 </div>
 
 <script type="module" src="/assets/js/index.js"></script>
