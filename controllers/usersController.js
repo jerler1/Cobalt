@@ -9,7 +9,7 @@ router.get("/users", async (req, res) => {
   console.log(req.session.user);
   try {
     const users = await db.User.findAll();
-    res.render("all-users", {
+    res.render("viewAllUsers", {
       users,
       username: req.session.user && req.session.user.userName,
     });
@@ -26,7 +26,7 @@ router.get("/users/:name", async (req, res) => {
       include: db.Drawing,
     });
     if (user != null) {
-      res.render("single-artist", {
+      res.render("userPortfolio", {
         user,
         username: req.session.user && req.session.user.userName,
       });

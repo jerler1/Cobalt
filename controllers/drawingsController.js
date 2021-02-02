@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/drawings", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
-    res.render("view-all", {
+    res.render("viewAllArtwork", {
       drawings,
       username: req.session.user && req.session.user.userName,
     });
@@ -20,7 +20,7 @@ router.get("/drawings", async (req, res) => {
 
 router.get("/drawings/new", async (req, res) => {
   if (req.session && req.session.user) {
-    res.render("create-new", {
+    res.render("createArtwork", {
       user: req.session.user,
       username: req.session.user && req.session.user.userName,
     });
@@ -37,7 +37,7 @@ router.get("/drawings/:id/edit", async (req, res) => {
       });
       if (drawing != null) {
         const owner = req.session.user.id == drawing.dataValues.UserId;
-        res.render("edit-artwork", {
+        res.render("editArtwork", {
           drawing,
           user: req.session.user,
           owner,
