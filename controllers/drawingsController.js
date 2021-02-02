@@ -6,7 +6,7 @@ const router = express.Router();
 //  VIEW ROUTES
 
 // View all drawings
-router.get("/drawings", async (req, res) => {
+router.get("/gallery", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
     res.render("view-all", {
