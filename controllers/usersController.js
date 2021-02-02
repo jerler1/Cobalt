@@ -19,7 +19,7 @@ router.get("/users", async (req, res) => {
   }
 });
 
-router.get("/users/:name", async (req, res) => {
+router.get("/:name", async (req, res) => {
   try {
     const user = await db.User.findOne({
       where: { userName: req.params.name },
