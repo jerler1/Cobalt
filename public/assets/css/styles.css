@@ -21,6 +21,7 @@ html {
 body {
   background-image: url("/assets/images/cbg3.jpg");
   background-size: cover;
+  background-repeat: repeat;
   height: 100%;
   margin: 0;
   /* font-family: 'Poppins', sans-serif;*/
@@ -78,7 +79,21 @@ border-radius: 5px;
 color: #06065C;
 /* align-content: center !important; */
 }
-
+.box {
+  background-color: #feae00;
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 20%;
+  align-items: center;
+  text-align: center;
+  /* padding: 30px; */
+}
+.card{
+  border-radius: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bolder;
+  font-size: medium;
+  }
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
   color: #feae00;
