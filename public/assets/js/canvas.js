@@ -90,6 +90,12 @@ function onMouseMove(e) {
       ctx.setLineDash([5, 5]);
       ctx.lineWidth = 1;
       ctx.strokeRect(startX, startY, x - startX, y - startY);
+    } else if (tool == 'circle') {
+      ctx.setLineDash([5, 5]);
+      ctx.lineWidth = 1;
+      const radius = Math.sqrt((x - startX) ** 2 + (y - startY) ** 2);
+      ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+      ctx.stroke();
     } else if (tool == 'line') {
       ctx.setLineDash([5, 5]);
       ctx.lineWidth = 1;
