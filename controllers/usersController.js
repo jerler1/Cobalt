@@ -9,7 +9,10 @@ router.get("/users", async (req, res) => {
   console.log(req.session.user);
   try {
     const users = await db.User.findAll();
-    res.render("all-users", { users, username: req.session.user && req.session.user.userName });
+    res.render("all-users", {
+      users,
+      username: req.session.user && req.session.user.userName,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).send("Something went wrong!");
@@ -23,7 +26,10 @@ router.get("/users/:name", async (req, res) => {
       include: db.Drawing,
     });
     if (user != null) {
-      res.render("single-artist", { user });
+      res.render("single-artist", {
+        user,
+        username: req.session.user && req.session.user.userName,
+      });
     } else {
       res.status(404).render("not-found");
     }
