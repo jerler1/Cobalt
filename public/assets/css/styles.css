@@ -83,7 +83,6 @@ align-content: center !important;
 width: 5%;
 height: 5%;
 */
-}
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
   color: #FEAE00;
@@ -100,9 +99,9 @@ align-content: center !important;
 }
    
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
-/*  background-color: #ccc;*/
-}
+/* .active, .collapsible:hover {
+ background-color: #ccc;
+} */
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
