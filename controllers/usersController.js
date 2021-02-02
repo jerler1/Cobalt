@@ -133,7 +133,7 @@ router.post("/login", async (req, res) => {
   if (user != null) {
     // setUp the user sessions and redirect to their page.
     req.session.user = user;
-    res.redirect(`/users/${userName}`);
+    res.redirect(`/${userName}`);
   } else {
     // couldn't find that username so send back a 400? status
     res.status(400).json({
