@@ -1,1 +1,14 @@
-<h1>View All Artwork</h1>
+{{> header }}
+
+<div class="columns">
+    <div class="column is-one-third">
+        <h1>Gallery</h1>
+        <ul>
+            {{#each drawings}}
+            <li>
+                <a href="/drawings/{{this.id}}/edit">{{this.name}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
