@@ -1,1 +1,5 @@
 {{> header }}
+
+{{#each user.Drawings }}
+  {{> drawings user=../user name=name link=link}}
+{{/each}}
