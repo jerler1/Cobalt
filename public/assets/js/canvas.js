@@ -10,7 +10,7 @@ const ctx = c.getContext('2d');
 let startX = 0;
 let startY = 0;
 
-// ctx.lineWidth = 5;
+ctx.lineWidth = 3;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.globalCompositeOperation = 'source-over'
@@ -109,6 +109,11 @@ function onMouseMove(e) {
       ctx.moveTo(startX, startY);
       ctx.lineTo(x, y);
       ctx.stroke();
+    } else if (tool == 'eraser') {
+      currentPath.push([x, y]);
+      ctx.strokeStyle = 'white';
+      ctx.lineTo(x, y);
+      ctx.stroke();
     } else {
       currentPath.push([x, y]);
       ctx.lineTo(x, y);
@@ -132,7 +137,11 @@ function onMouseUp(e) {
     let endX = e.offsetX;
     let endY = e.offsetY;
     currentPath.push([endX, endY]);
-    paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath, ctx.lineWidth));
+    if (tool === 'eraser') {
+      paths.push(new DrawingElement(tool, 'white', currentPath, ctx.lineWidth));
+    } else {
+      paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath, ctx.lineWidth));
+    }
     currentPath = null;
     drawPaths(paths);
   }
