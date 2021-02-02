@@ -1,13 +1,14 @@
 <header>
     <div class="header" style="height: auto;">
-<img href="" class="logo is-left" src="/assets/images/CBNEW.png" style="width: 20%; box-shadow: 2 2 3px;"></img>
+        <a href="/"><img href="" class="logo is-left" src="/assets/images/CBNEW.png"
+                style="width: 20%; box-shadow: 2 2 3px;"></a>
 
-{{!-- {{#if username}} --}}
-<hr>
-<button href="/drawing" class="" style="font-size:medium"><strong>Cobalt Art Gallery</strong></button>
-<button href="/users/{{username}}" class="" style="font-size:medium"><strong>My Drawings</strong></button>
-<button class="" style="font-size:medium; background-color: white; "><strong>Log Out</strong></button>
-</div>
+        {{!-- {{#if username}} --}}
+        <hr>
+        <a href="/gallery" class="headerbuttons" style="font-size:medium"><strong>Cobalt Art Gallery</strong></a>
+        <a href="/{{username}}" class="headerbuttons" style="font-size:medium"><strong>My Drawings</strong></a>
+        <button class="" style="font-size:medium; background-color: white; "><strong>Log Out</strong></button>
+    </div>
     {{!-- {{/if}} --}}
 </header>
 
