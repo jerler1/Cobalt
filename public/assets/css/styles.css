@@ -125,3 +125,22 @@ color: #06065C;
 canvas {
   background-color: white;
 }
+
+
+.headerbuttons:visited {
+  color: #0206b2;
+}
+.headerbuttons:active {
+  color: #0096c7;
+}
+.headerbuttons {
+/* text-align: center !important;  */
+height: 50%;
+font-size: 20px;    
+background-color: #FEAE00;
+padding: 10px;
+transition: all 0.3s ease;
+border-radius: 5px;
+color: #06065C;
+/* align-content: center !important; */
+}
