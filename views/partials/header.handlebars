@@ -1,38 +1,14 @@
-<header class="hero is-link">
-    <div class="hero-body">
-        <div class="columns is-vcentered">
-            <div class="column is-3">
-                <p class="title">
-                    <a href="/"><img src="/assets/images/logow.png" alt="cobalt logo" class="logo"></a>
-                </p>
-            </div>
-            <div class="column is-6">
-                <p class="subtitle is-size-1 has-text-weight-bold is-family-sans-serif">
-                    Create and Collaborate
-                </p>
-            </div>
-        </div>
-    </div>
-    {{#if username}}
-    <nav class="navbar is-info is-vcentered">
-        <div class="navbar-start">
-            <div class="navbar-item">
-                <a href="/drawings" class="button is-link is-light">
-                    <strong>Cobalt Art Gallery</strong>
-                </a>
-            </div>
-            <div class="navbar-item">
-                <a href="/users/{{username}}" class="button is-link is-light">
-                    <strong>My Drawings</strong>
-                </a>
-            </div>
-            <div class="navbar-item">
-                <a href="/drawings/new" class="button is-link is-light">
-                    <strong>Create New Drawing</strong>
-                </a>
-            </div>
-        </div>
-    </nav>
+<header>
+    <div class="header" style="height: auto;">
+<img href="" class="logo is-left" src="/assets/images/logog.png" style="width: 20%;"></img>
+<p class="title" style="color: white; font-size:medium"><strong>Create and Collaborate</strong></p>
+<hr>
+{{#if username}}
+<button href="/drawing" class="" style="font-size:medium"><strong>Cobalt Art Gallery</strong></button>
+<button href="/users/{{username}}" class="" style="font-size:medium"><strong>My Drawings</strong></button>
+<input class="search input" style="font-size:medium" type="text" placeholder="Find artwork or artist"></input>
+<button class="" style="font-size:medium"><strong>Search</strong></button>
+</div>
     {{/if}}
 </header>
 
