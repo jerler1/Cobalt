@@ -6,7 +6,7 @@
         <ul>
             {{#each drawings}}
             <li>
-                <a href="/drawings/{{this.id}}/edit">{{this.name}}</a>
+                <a href="/{{this.username}}/drawing/{{this.id}}">{{this.name}}</a>
             </li>
             {{/each}}
         </ul>
