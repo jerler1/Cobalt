@@ -3,13 +3,14 @@ import DrawingElement from './DrawingElement.js';
 const toolbar = document.querySelector('.toolbar');
 const ownerControls = document.querySelector('.owner-controls');
 const colorInput = document.querySelector('#color');
+const lineWidthInput = document.querySelector('#lineWidth');
 const c = document.querySelector('canvas#main');
 const ctx = c.getContext('2d');
 
 let startX = 0;
 let startY = 0;
 
-ctx.lineWidth = 5;
+ctx.lineWidth = 3;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.globalCompositeOperation = 'source-over'
@@ -22,12 +23,16 @@ let paths = JSON.parse(c.getAttribute('data-paths')) || [];
 const history = [];
 
 if (paths.length != 0) {
-  paths = paths.map(p => new DrawingElement(p.type, p.color, p.paths));
+  paths = paths.map(p => new DrawingElement(p.type, p.color, p.paths, p.lineWidth));
   drawPaths(paths);
 }
 
 colorInput.addEventListener('input', (e) => {
   ctx.strokeStyle = e.target.value;
+});
+
+lineWidthInput.addEventListener('input', (e) => {
+  ctx.lineWidth = e.target.value;
 });
 
 if (ownerControls != null) {
@@ -44,6 +49,8 @@ if (ownerControls != null) {
         data: JSON.stringify({ name: drawingName, link, data: pathData, userId }),
       }).then(response => {
         console.log(response);
+        // Pop up a notification or something that says saved?
+        alert('Drawing updated successfully.');
       }).catch((error) => {
         // TODO: Actually handle any error.
       });
@@ -54,7 +61,7 @@ if (ownerControls != null) {
           method: 'DELETE'
         }).then((response) => {
           // Temporary. Where should we actually navigate to?
-          location.href = '/';
+          location.href = '../';
         }).catch((error) => {
           // TODO: Actually handle any error.
         });
@@ -63,33 +70,10 @@ if (ownerControls != null) {
   });
 }
 
-toolbar.addEventListener('click', (e) => {
-  if (e.target.matches('#save')) {
-    const pathData = JSON.stringify(paths);
-    const drawingName = document.querySelector('#drawingName').value;
-    const userId = e.target.getAttribute('data-userid');
-    const link  = c.toDataURL();
-    $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
-      console.log(response);
-    }).catch((error) => {
-      // TODO: actually handle the error.
-    });
-  } else if (e.target.matches('#undo')) {
-    if (paths.length == 0) {
-      return;
-    }
-    history.push(paths.pop());
-    drawPaths(paths);
-  } else if (e.target.matches('#redo')) {
-    if (history.length == 0) {
-      return;
-    }
-    paths.push(history.pop());
-    drawPaths(paths);
-  } else if (e.target.matches('button[data-tool]')) {
-    tool = e.target.getAttribute('data-tool');
-  }
+toolbar.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', handleButtonClick);
 });
+
 c.addEventListener('pointerdown', onMouseDown);
 c.addEventListener('pointermove', onMouseMove);
 c.addEventListener('pointerup', onMouseUp);
@@ -107,15 +91,27 @@ function onMouseMove(e) {
     ctx.clearRect(0, 0, c.width, c.height);
     drawPaths(paths);
     ctx.save();
-    if (tool == 'square') {
+    if (tool == 'square' || tool == 'square-filled') {
       ctx.setLineDash([5, 5]);
       ctx.lineWidth = 1;
       ctx.strokeRect(startX, startY, x - startX, y - startY);
+    } else if (tool == 'circle' || tool == 'circle-filled') {
+      ctx.setLineDash([5, 5]);
+      ctx.lineWidth = 1;
+      const radius = Math.sqrt((x - startX) ** 2 + (y - startY) ** 2);
+      ctx.beginPath();
+      ctx.arc(startX, startY, radius, 0, Math.PI * 2);
+      ctx.stroke();
     } else if (tool == 'line') {
       ctx.setLineDash([5, 5]);
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(startX, startY);
+      ctx.lineTo(x, y);
+      ctx.stroke();
+    } else if (tool == 'eraser') {
+      currentPath.push([x, y]);
+      ctx.strokeStyle = 'white';
       ctx.lineTo(x, y);
       ctx.stroke();
     } else {
@@ -141,7 +137,11 @@ function onMouseUp(e) {
     let endX = e.offsetX;
     let endY = e.offsetY;
     currentPath.push([endX, endY]);
-    paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath));
+    if (tool === 'eraser') {
+      paths.push(new DrawingElement(tool, 'white', currentPath, ctx.lineWidth));
+    } else {
+      paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath, ctx.lineWidth));
+    }
     currentPath = null;
     drawPaths(paths);
   }
@@ -152,7 +152,42 @@ function drawPaths(paths) {
   paths.forEach(el => {
     ctx.save();
     ctx.strokeStyle = el.color;
-    ctx.stroke(el.toPath2D());
+    ctx.fillStyle = el.color;
+    ctx.lineWidth = el.lineWidth;
+    if (el.type == 'circle-filled' || el.type == 'square-filled') {
+      ctx.fill(el.toPath2D());
+    } else {
+      ctx.stroke(el.toPath2D());
+    }
     ctx.restore();
   });
+}
+
+function handleButtonClick(e) {
+  if (e.currentTarget.matches('#save')) {
+    const pathData = JSON.stringify(paths);
+    const drawingName = document.querySelector('#drawingName').value;
+    const userId = e.currentTarget.getAttribute('data-userid');
+    const link  = c.toDataURL();
+    $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
+      console.log(response);
+      location.href = `/${response.user.userName}/drawing/${response.drawing.id}`;
+    }).catch((error) => {
+      // TODO: actually handle the error.
+    });
+  } else if (e.currentTarget.matches('#undo')) {
+    if (paths.length == 0) {
+      return;
+    }
+    history.push(paths.pop());
+    drawPaths(paths);
+  } else if (e.currentTarget.matches('#redo')) {
+    if (history.length == 0) {
+      return;
+    }
+    paths.push(history.pop());
+    drawPaths(paths);
+  } else if (e.currentTarget.matches('button[data-tool]')) {
+    tool = e.currentTarget.getAttribute('data-tool');
+  }
 }
