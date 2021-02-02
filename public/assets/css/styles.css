@@ -11,20 +11,20 @@ html {
 }
 .landingPageBG {
   background-image: url("../images/main.png");
-  background-size:cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
   min-height: 100%;
 }
 
-
 /* =============================== */
 body {
   background-image: url("/assets/images/cbg3.jpg");
   background-size: cover;
+  background-repeat: repeat;
   height: 100%;
   margin: 0;
-/* font-family: 'Poppins', sans-serif;*/
+  /* font-family: 'Poppins', sans-serif;*/
   font-weight: bolder;
 }
 .header {
@@ -38,35 +38,35 @@ body {
 }
 .icon-bar {
   width: 100%;
-  background-color: #FEAE00;
+  background-color: #feae00;
   border-radius: 25px;
-  overflow: auto;  
+  overflow: auto;
   text-align: center;
   align-content: center;
   align-self: center !important;
 }
 
 .icon-bar button:hover {
-border-color:#000;
-border-top-left-radius:2em;
-border-top-right-radius:2em;
-border-bottom-left-radius:2em;
-border-bottom-right-radius:2em;
-background-color: #0096C7;
+  border-color: #000;
+  border-top-left-radius: 2em;
+  border-top-right-radius: 2em;
+  border-bottom-left-radius: 2em;
+  border-bottom-right-radius: 2em;
+  background-color: #0096c7;
 }
 .icon-bar button:focus {
-  background-color: #0096C7;
-    outline: 0;
-}    
+  background-color: #0096c7;
+  outline: 0;
+}
 button:visited {
-  color: #0206B2;
+  color: #0206b2;
 }
 .input {
   height: auto;
   width: 50%;
 }
 button:active {
-  color: #0096C7;
+  color: #0096c7;
 }
 button {
 /* text-align: center !important;  */
@@ -78,48 +78,48 @@ transition: all 0.3s ease;
 border-radius: 5px;
 color: #06065C;
 /* align-content: center !important; */
-    }
-    /* button {
-      text-align: center !important; 
-      font-size: 40px;    
-      color: #FEAE00;
-      padding: 10px;
-      transition: all 0.3s ease;
-      border-radius: 15px;
-      background-color: #06065C;
-      align-content: center !important;
-          } */
-/*
-width: 5%;
-height: 5%;
-*/
 }
+.box {
+  background-color: #feae00;
+  font-size: large;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  width: 20%;
+  align-items: center;
+  text-align: center;
+  /* padding: 30px; */
+}
+.card{
+  border-radius: 25px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: bolder;
+  font-size: medium;
+  }
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
-  color: #FEAE00;
+  color: #feae00;
   border-radius: 25px;
-  background-color: #03045C;
+  background-color: #03045c;
   cursor: pointer;
   padding: 8px;
   border: none;
   text-align: left;
   outline: none;
   font-size: 50px;
-align-content: center !important;
-/*font-family: 'Poppins', sans-serif;*/
+  align-content: center !important;
+  /*font-family: 'Poppins', sans-serif;*/
 }
-   
+
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .collapsible:hover {
-/*  background-color: #ccc;*/
-}
+/* .active, .collapsible:hover {
+ background-color: #ccc;
+} */
 
 /* Style the collapsible content. Note: hidden by default */
 .content {
   padding: 0 8px;
   display: none;
   overflow: hidden;
-/*  background-color: #f1f1f1;*/
+  /*  background-color: #f1f1f1;*/
 }
 
 canvas {
