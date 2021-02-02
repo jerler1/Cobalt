@@ -86,14 +86,15 @@ function onMouseMove(e) {
     ctx.clearRect(0, 0, c.width, c.height);
     drawPaths(paths);
     ctx.save();
-    if (tool == 'square') {
+    if (tool == 'square' || tool == 'square-filled') {
       ctx.setLineDash([5, 5]);
       ctx.lineWidth = 1;
       ctx.strokeRect(startX, startY, x - startX, y - startY);
-    } else if (tool == 'circle') {
+    } else if (tool == 'circle' || tool == 'circle-filled') {
       ctx.setLineDash([5, 5]);
       ctx.lineWidth = 1;
       const radius = Math.sqrt((x - startX) ** 2 + (y - startY) ** 2);
+      ctx.beginPath();
       ctx.arc(startX, startY, radius, 0, Math.PI * 2);
       ctx.stroke();
     } else if (tool == 'line') {
@@ -137,7 +138,12 @@ function drawPaths(paths) {
   paths.forEach(el => {
     ctx.save();
     ctx.strokeStyle = el.color;
-    ctx.stroke(el.toPath2D());
+    ctx.fillStyle = el.color;
+    if (el.type == 'circle-filled' || el.type == 'square-filled') {
+      ctx.fill(el.toPath2D());
+    } else {
+      ctx.stroke(el.toPath2D());
+    }
     ctx.restore();
   });
 }
