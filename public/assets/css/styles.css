@@ -30,7 +30,7 @@ body {
     .logo{
         height: auto
     }
-.navbar {
+/* .navbar {
 background-image: url("assets/images/navbg.png") ;
 background: cover;
 height: auto;
@@ -38,7 +38,7 @@ height: auto;
         font-size: 36px;
         text-align: center;    
     height: 25% !important;
-    }
+    } */
 .icon-bar {
   width: 100%;
   background-color: #FEAE00;
