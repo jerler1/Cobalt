@@ -1,50 +1,63 @@
-const express = require('express');
-const db = require('../models');
+const express = require("express");
+const db = require("../models");
 
 const router = express.Router();
 
 //  VIEW ROUTES
 
-router.get('/drawings', async (req, res) => {
+router.get("/drawings", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
-    res.render('view-all', { drawings });
+    res.render("view-all", {
+      drawings,
+      username: req.session.user && req.session.user.userName,
+    });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Something went wrong!');
+    res.status(500).send("Something went wrong!");
   }
 });
 
-router.get('/drawings/new', async (req, res) => {
+router.get("/drawings/new", async (req, res) => {
   if (req.session && req.session.user) {
-    res.render('create-new', { user: req.session.user });
+    res.render("create-new", {
+      user: req.session.user,
+      username: req.session.user && req.session.user.userName,
+    });
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 });
 
-router.get('/drawings/:id/edit', async (req, res) => {
+router.get("/drawings/:id/edit", async (req, res) => {
   if (req.session && req.session.user) {
     try {
-      const drawing = await db.Drawing.findOne({ where: { id: req.params.id } });
+      const drawing = await db.Drawing.findOne({
+        where: { id: req.params.id },
+      });
       if (drawing != null) {
         const owner = req.session.user.id == drawing.dataValues.UserId;
-        res.render('edit-artwork', { drawing, user: req.session.user, owner });
+        res.render("edit-artwork", {
+          drawing,
+          user: req.session.user,
+          owner,
+          username: req.session.user && req.session.user.userName,
+        });
       } else {
-        res.status(404).render('not-found');
+        res.status(404).render("not-found");
       }
     } catch (error) {
       console.error(error);
-      res.status(500).send('Something went wrong!');
+      res.status(500).send("Something went wrong!");
     }
   } else {
-    res.redirect('/');
+    res.redirect("/");
   }
 });
 
 //  API ROUTES
 
-router.get('/api/drawings', async (req, res) => {
+router.get("/api/drawings", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
     res.json(drawings);
@@ -57,9 +70,12 @@ router.get('/api/drawings', async (req, res) => {
   }
 });
 
-router.get('/api/drawings/:id', async (req, res) => {
+router.get("/api/drawings/:id", async (req, res) => {
   try {
-    const drawing = await db.Drawing.findOne({ where: { id: req.params.id }, include: db.User });
+    const drawing = await db.Drawing.findOne({
+      where: { id: req.params.id },
+      include: db.User,
+    });
     res.json(drawing);
   } catch (err) {
     console.error(err);
@@ -70,7 +86,7 @@ router.get('/api/drawings/:id', async (req, res) => {
   }
 });
 
-router.post('/api/drawings', async (req, res) => {
+router.post("/api/drawings", async (req, res) => {
   const { name, link, data, userId } = req.body;
   const newDrawing = {
     name,
@@ -84,7 +100,7 @@ router.post('/api/drawings', async (req, res) => {
     // should probably check the result.
     res.status(201).json({
       error: false,
-      message: 'Drawing created.',
+      message: "Drawing created.",
       drawing,
     });
   } catch (error) {
@@ -96,7 +112,7 @@ router.post('/api/drawings', async (req, res) => {
   }
 });
 
-router.put('/api/drawings/:id', async (req, res) => {
+router.put("/api/drawings/:id", async (req, res) => {
   const { name, link, data, userId } = req.body;
   const updatedDrawing = {
     name,
@@ -106,10 +122,12 @@ router.put('/api/drawings/:id', async (req, res) => {
   };
 
   try {
-    const drawing = await db.Drawing.update(updatedDrawing, { where: { id: req.params.id }});
+    const drawing = await db.Drawing.update(updatedDrawing, {
+      where: { id: req.params.id },
+    });
     res.json({
       error: false,
-      message: 'Drawing updated.',
+      message: "Drawing updated.",
       drawing,
     });
   } catch (error) {
@@ -121,12 +139,12 @@ router.put('/api/drawings/:id', async (req, res) => {
   }
 });
 
-router.delete('/api/drawings/:id', async (req, res) => {
+router.delete("/api/drawings/:id", async (req, res) => {
   try {
     const result = await db.Drawing.destroy({ where: { id: req.params.id } });
     res.json({
       error: false,
-      message: 'Ok',
+      message: "Ok",
     });
   } catch (error) {
     console.error(error);
