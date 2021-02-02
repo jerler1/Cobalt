@@ -1,37 +1,28 @@
-<header class="hero is-link p-3">
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a class="navbar-item" href="">
-      <img src="logog.png" alt="" width="20%" height="20%">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-    </a>
-  </div>
-</nav>
+<header class="hero is-link">
     <div class="hero-body">
-        {{!-- <a href="/" class="brand-logo">Colbalt Canvas</a> --}}
-        <div class="columns">
-            <div class="column">
+        <div class="columns is-vcentered">
+            <div class="column is-3">
                 <p class="title">
-                    Cobalt Canvas
+                    <a href="/"><img src="/assets/images/logow.png" alt="cobalt logo" class="logo"></a>
                 </p>
             </div>
-            <div class="column">
-                <p class="subtitle">
+            <div class="column is-6">
+                <p class="subtitle is-size-1 has-text-weight-bold is-family-sans-serif">
                     Create and Collaborate
                 </p>
             </div>
         </div>
     </div>
-
-    <nav>
+    {{#if username}}
+    <nav class="navbar is-info">
         <div class="nav-wrapper">
-            <div class="columns">
-                <div class="column">
-                    <a class="button is-link is-light">
+            <div class="columns is-vcentered ">
+                <div class="column is-4">
+                    <a href="/drawing" class="button is-link is-light">
                         <strong>Cobalt Art Gallery</strong>
                     </a>
                 </div>
-                <div class="column">
+                <div class="column is-4">
                     <div class="field is-grouped">
                         <p class="control is-expanded">
                             <input class="input" type="text" placeholder="Find artwork or artist">
@@ -43,13 +34,16 @@
                         </p>
                     </div>
                 </div>
-                <div class="column">
-                    <a class="button is-link is-light">
-                        <strong>All User View</strong>
+                <div class="column is-4">
+                    <a href="/users/{{username}}" class="button is-link is-light">
+                        <strong>My Drawings</strong>
                     </a>
                 </div>
             </div>
         </div>
     </nav>
-
+    {{/if}}
 </header>
+
+
+<script type="module" src="/assets/js/header.js"></script>
