@@ -1,11 +1,11 @@
 /* Header CSS */
 /* =============================== */
-.hero-body {
+/* .hero-body {
     background-image: url("../images/navbg.png");
-}
-.logo {
+} */
+/* .logo {
     width: 100%;
-}
+} */
 html {
   height: 100%;
 }
@@ -27,18 +27,15 @@ body {
 /* font-family: 'Poppins', sans-serif;*/
   font-weight: bolder;
 }
-    .logo{
-        height: auto
-    }
-/* .navbar {
-background-image: url("assets/images/navbg.png") ;
-background: cover;
-height: auto;
-        align-content: 
-        font-size: 36px;
-        text-align: center;    
-    height: 25% !important;
-    } */
+.header {
+  overflow: hidden;
+  background-image: url("../images/navbg.png");
+  padding: 20px 10px;
+  text-align: center !important;
+  height: auto !important; 
+  background: cover;
+  color: #FEAE00;
+}
 .icon-bar {
   width: 100%;
   background-color: #FEAE00;
@@ -64,21 +61,34 @@ background-color: #0096C7;
 button:visited {
   color: #0206B2;
 }
-
+.input {
+  height: auto;
+  width: 50%;
+}
 button:active {
   color: #0096C7;
 }
 button {
-text-align: center !important; 
-font-size: 40px;    
-color: #FEAE00;
+/* text-align: center !important;  */
+height: 50%;
+font-size: 20px;    
+background-color: #FEAE00;
 padding: 10px;
 transition: all 0.3s ease;
-border-radius: 15px;
-background-color: #06065C;
-align-content: center !important;
+border-radius: 5px;
+color: #06065C;
+/* align-content: center !important; */
     }
-
+    /* button {
+      text-align: center !important; 
+      font-size: 40px;    
+      color: #FEAE00;
+      padding: 10px;
+      transition: all 0.3s ease;
+      border-radius: 15px;
+      background-color: #06065C;
+      align-content: center !important;
+          } */
 /*
 width: 5%;
 height: 5%;
