@@ -6,13 +6,14 @@
     <h2>{{ user.userName }}</h2>
   {{/if}}
   <div class="toolbar">
-    <input class="button" type="color" name="color" id="color" />
+    {{!-- <input class="button" type="color" name="color" id="color" />
     <button class="button" data-tool="line">line</button>
     <button class="button" data-tool="square">square</button>
     <button class="button" data-tool="pen">pen</button>
     <button class="button" id="save" data-userid="{{ user.id }}">Save</button>
     <button class="button" id="undo">Undo</button>
-    <button class="button" id="redo">Redo</button>
+    <button class="button" id="redo">Redo</button> --}}
+    {{> toolbar }}
   </div>
   <div>
     <label for="drawingName">Name:</label>
