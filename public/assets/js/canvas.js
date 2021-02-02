@@ -44,6 +44,8 @@ if (ownerControls != null) {
         data: JSON.stringify({ name: drawingName, link, data: pathData, userId }),
       }).then(response => {
         console.log(response);
+        // Pop up a notification or something that says saved?
+        alert('Drawing updated successfully.');
       }).catch((error) => {
         // TODO: Actually handle any error.
       });
@@ -54,7 +56,7 @@ if (ownerControls != null) {
           method: 'DELETE'
         }).then((response) => {
           // Temporary. Where should we actually navigate to?
-          location.href = '/';
+          location.href = '../';
         }).catch((error) => {
           // TODO: Actually handle any error.
         });
@@ -63,33 +65,10 @@ if (ownerControls != null) {
   });
 }
 
-toolbar.addEventListener('click', (e) => {
-  if (e.target.matches('#save')) {
-    const pathData = JSON.stringify(paths);
-    const drawingName = document.querySelector('#drawingName').value;
-    const userId = e.target.getAttribute('data-userid');
-    const link  = c.toDataURL();
-    $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
-      console.log(response);
-    }).catch((error) => {
-      // TODO: actually handle the error.
-    });
-  } else if (e.target.matches('#undo')) {
-    if (paths.length == 0) {
-      return;
-    }
-    history.push(paths.pop());
-    drawPaths(paths);
-  } else if (e.target.matches('#redo')) {
-    if (history.length == 0) {
-      return;
-    }
-    paths.push(history.pop());
-    drawPaths(paths);
-  } else if (e.target.matches('button[data-tool]')) {
-    tool = e.target.getAttribute('data-tool');
-  }
+toolbar.querySelectorAll('button').forEach(button => {
+  button.addEventListener('click', handleButtonClick);
 });
+
 c.addEventListener('pointerdown', onMouseDown);
 c.addEventListener('pointermove', onMouseMove);
 c.addEventListener('pointerup', onMouseUp);
@@ -155,4 +134,33 @@ function drawPaths(paths) {
     ctx.stroke(el.toPath2D());
     ctx.restore();
   });
+}
+
+function handleButtonClick(e) {
+  if (e.currentTarget.matches('#save')) {
+    const pathData = JSON.stringify(paths);
+    const drawingName = document.querySelector('#drawingName').value;
+    const userId = e.currentTarget.getAttribute('data-userid');
+    const link  = c.toDataURL();
+    $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
+      console.log(response);
+      location.href = `/${response.user.userName}/drawing/${response.drawing.id}`;
+    }).catch((error) => {
+      // TODO: actually handle the error.
+    });
+  } else if (e.currentTarget.matches('#undo')) {
+    if (paths.length == 0) {
+      return;
+    }
+    history.push(paths.pop());
+    drawPaths(paths);
+  } else if (e.currentTarget.matches('#redo')) {
+    if (history.length == 0) {
+      return;
+    }
+    paths.push(history.pop());
+    drawPaths(paths);
+  } else if (e.currentTarget.matches('button[data-tool]')) {
+    tool = e.currentTarget.getAttribute('data-tool');
+  }
 }
