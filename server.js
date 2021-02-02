@@ -43,8 +43,8 @@ app.get("/api/config", (req, res) => {
   });
 });
 
-app.use(usersController);
 app.use(drawingsController);
+app.use(usersController);
 
 db.sequelize
   .sync()

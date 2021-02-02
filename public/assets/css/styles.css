@@ -1,11 +1,11 @@
 /* Header CSS */
 /* =============================== */
-.hero-body {
-  background-image: url("../images/navbg.png");
-}
-.logo {
-  width: 100%;
-}
+/* .hero-body {
+    background-image: url("../images/navbg.png");
+} */
+/* .logo {
+    width: 100%;
+} */
 html {
   height: 100%;
 }
@@ -26,18 +26,15 @@ body {
   /* font-family: 'Poppins', sans-serif;*/
   font-weight: bolder;
 }
-.logo {
-  height: auto;
+.header {
+  overflow: hidden;
+  background-image: url("../images/navbg.png");
+  padding: 20px 10px;
+  text-align: center !important;
+  height: auto !important; 
+  background: cover;
+  color: #FEAE00;
 }
-/* .navbar {
-background-image: url("assets/images/navbg.png") ;
-background: cover;
-height: auto;
-        align-content: 
-        font-size: 36px;
-        text-align: center;    
-    height: 25% !important;
-    } */
 .icon-bar {
   width: 100%;
   background-color: #feae00;
@@ -63,25 +60,25 @@ height: auto;
 button:visited {
   color: #0206b2;
 }
-
+.input {
+  height: auto;
+  width: 50%;
+}
 button:active {
   color: #0096c7;
 }
 button {
-  text-align: center !important;
-  font-size: 40px;
-  color: #feae00;
-  padding: 10px;
-  transition: all 0.3s ease;
-  border-radius: 15px;
-  background-color: #06065c;
-  align-content: center !important;
+/* text-align: center !important;  */
+height: 50%;
+font-size: 20px;    
+background-color: #FEAE00;
+padding: 10px;
+transition: all 0.3s ease;
+border-radius: 5px;
+color: #06065C;
+/* align-content: center !important; */
 }
 
-/*
-width: 5%;
-height: 5%;
-*/
 /* Style the button that is used to open and close the collapsible content */
 .collapsible {
   color: #feae00;

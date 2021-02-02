@@ -37,7 +37,7 @@ $(document).ready(function () {
     // Do we want to validate here?
     $.post("/api/users", { userName })
       .then(function (result) {
-        location.href = "/users/" + userName;
+        location.href = "/" + userName;
       })
       .catch(function (err) {
         console.error(err);
@@ -48,7 +48,7 @@ $(document).ready(function () {
     const userName = logInUserNameInput.val();
     $.post("/login", { userName })
       .then(function () {
-        location.href = "/users/" + userName;
+        location.href = "/" + userName;
       })
       .catch(function (err) {
         console.error(err);

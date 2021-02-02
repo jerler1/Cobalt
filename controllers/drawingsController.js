@@ -5,10 +5,11 @@ const router = express.Router();
 
 //  VIEW ROUTES
 
-router.get("/drawings", async (req, res) => {
+// View all drawings
+router.get("/gallery", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
-    res.render("view-all", {
+    res.render("viewAllArtwork", {
       drawings,
       username: req.session.user && req.session.user.userName,
     });
@@ -18,9 +19,10 @@ router.get("/drawings", async (req, res) => {
   }
 });
 
-router.get("/drawings/new", async (req, res) => {
+// Create a new drawing
+router.get("/drawing/", async (req, res) => {
   if (req.session && req.session.user) {
-    res.render("create-new", {
+    res.render("createArtwork", {
       user: req.session.user,
       username: req.session.user && req.session.user.userName,
     });
@@ -29,7 +31,8 @@ router.get("/drawings/new", async (req, res) => {
   }
 });
 
-router.get("/drawings/:id/edit", async (req, res) => {
+// View a single users drawing
+router.get("/:user/drawing/:id", async (req, res) => {
   if (req.session && req.session.user) {
     try {
       const drawing = await db.Drawing.findOne({
@@ -37,7 +40,7 @@ router.get("/drawings/:id/edit", async (req, res) => {
       });
       if (drawing != null) {
         const owner = req.session.user.id == drawing.dataValues.UserId;
-        res.render("edit-artwork", {
+        res.render("editArtwork", {
           drawing,
           user: req.session.user,
           owner,
@@ -102,6 +105,7 @@ router.post("/api/drawings", async (req, res) => {
       error: false,
       message: "Drawing created.",
       drawing,
+      user: req.session.user,
     });
   } catch (error) {
     console.error(error);
