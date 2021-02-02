@@ -5,6 +5,7 @@ const router = express.Router();
 
 //  VIEW ROUTES
 
+// View all drawings
 router.get("/drawings", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
@@ -18,7 +19,8 @@ router.get("/drawings", async (req, res) => {
   }
 });
 
-router.get("/drawings/new", async (req, res) => {
+// Create a new drawing
+router.get("/drawing/", async (req, res) => {
   if (req.session && req.session.user) {
     res.render("create-new", {
       user: req.session.user,
@@ -29,7 +31,8 @@ router.get("/drawings/new", async (req, res) => {
   }
 });
 
-router.get("/drawings/:id/edit", async (req, res) => {
+// View a single users drawing
+router.get("/:user/drawing/:id", async (req, res) => {
   if (req.session && req.session.user) {
     try {
       const drawing = await db.Drawing.findOne({
@@ -102,6 +105,7 @@ router.post("/api/drawings", async (req, res) => {
       error: false,
       message: "Drawing created.",
       drawing,
+      user: req.session.user,
     });
   } catch (error) {
     console.error(error);
