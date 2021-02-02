@@ -3,13 +3,14 @@ import DrawingElement from './DrawingElement.js';
 const toolbar = document.querySelector('.toolbar');
 const ownerControls = document.querySelector('.owner-controls');
 const colorInput = document.querySelector('#color');
+const lineWidthInput = document.querySelector('#lineWidth');
 const c = document.querySelector('canvas#main');
 const ctx = c.getContext('2d');
 
 let startX = 0;
 let startY = 0;
 
-ctx.lineWidth = 5;
+// ctx.lineWidth = 5;
 ctx.lineJoin = 'round';
 ctx.lineCap = 'round';
 ctx.globalCompositeOperation = 'source-over'
@@ -22,12 +23,16 @@ let paths = JSON.parse(c.getAttribute('data-paths')) || [];
 const history = [];
 
 if (paths.length != 0) {
-  paths = paths.map(p => new DrawingElement(p.type, p.color, p.paths));
+  paths = paths.map(p => new DrawingElement(p.type, p.color, p.paths, p.lineWidth));
   drawPaths(paths);
 }
 
 colorInput.addEventListener('input', (e) => {
   ctx.strokeStyle = e.target.value;
+});
+
+lineWidthInput.addEventListener('input', (e) => {
+  ctx.lineWidth = e.target.value;
 });
 
 if (ownerControls != null) {
@@ -127,7 +132,7 @@ function onMouseUp(e) {
     let endX = e.offsetX;
     let endY = e.offsetY;
     currentPath.push([endX, endY]);
-    paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath));
+    paths.push(new DrawingElement(tool, ctx.strokeStyle, currentPath, ctx.lineWidth));
     currentPath = null;
     drawPaths(paths);
   }
@@ -139,6 +144,7 @@ function drawPaths(paths) {
     ctx.save();
     ctx.strokeStyle = el.color;
     ctx.fillStyle = el.color;
+    ctx.lineWidth = el.lineWidth;
     if (el.type == 'circle-filled' || el.type == 'square-filled') {
       ctx.fill(el.toPath2D());
     } else {

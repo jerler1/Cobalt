@@ -1,8 +1,9 @@
 export default class DrawingElement {
-  constructor(type, color, paths) {
+  constructor(type, color, paths, lineWidth = 5) {
     this.type = type;
     this.color = color;
     this.paths = paths;
+    this.lineWidth = lineWidth;
   }
 
   toPath2D() {
