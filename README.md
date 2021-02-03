@@ -25,10 +25,10 @@ Have you ever wanted to make an art project with a friend?  Cobalt Canvas is for
 
 ## Usage 
 This code should be used for the purpose of creating/editing code for a drawing/sharing art application.
-![Cobalt Canvas](#)
+![Cobalt Canvas](./public/assets/images/screenshot.png)
 
 ## View Website
-Click here to view the live website [VIEW APP](#)
+Click here to view the live website [VIEW APP](https://cobalt-canvas.herokuapp.com/)
 
 ## Credits
 [John Erler](https://github.com/jerler1)  
