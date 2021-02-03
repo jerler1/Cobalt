@@ -5,13 +5,18 @@ const router = express.Router();
 
 //  VIEW ROUTES
 
+router.get("/logout", (req, res) => {
+  req.session.destroy();
+  res.redirect("/");
+});
+
 router.get("/users", async (req, res) => {
   console.log(req.session.user);
   try {
     const users = await db.User.findAll();
     res.render("viewAllUsers", {
       users,
-      username: req.session.user && req.session.user.userName,
+      username: req.session.user && req.session.user.userName
     });
   } catch (error) {
     console.error(error);
@@ -23,12 +28,12 @@ router.get("/:name", async (req, res) => {
   try {
     const user = await db.User.findOne({
       where: { userName: req.params.name },
-      include: db.Drawing,
+      include: db.Drawing
     });
     if (user != null) {
       res.render("userPortfolio", {
         user,
-        username: req.session.user && req.session.user.userName,
+        username: req.session.user && req.session.user.userName
       });
     } else {
       res.status(404).render("not-found");
@@ -49,7 +54,7 @@ router.get("/api/users", async (req, res) => {
     console.error(err);
     res.status(500).json({
       error: true,
-      message: "Couldn't get users.",
+      message: "Couldn't get users."
     });
   }
 });
@@ -58,14 +63,14 @@ router.get("/api/users/:id", async (req, res) => {
   try {
     const user = await db.User.findOne({
       where: { id: req.params.id },
-      include: db.Drawing,
+      include: db.Drawing
     });
     res.json(user);
   } catch (err) {
     console.error(err);
     res.status(500).json({
       error: true,
-      message: "Couldn't get user.",
+      message: "Couldn't get user."
     });
   }
 });
@@ -74,7 +79,7 @@ router.post("/api/users", async (req, res) => {
   console.log(req.session);
   const { userName } = req.body;
   const newUser = {
-    userName,
+    userName
   };
 
   try {
@@ -85,19 +90,19 @@ router.post("/api/users", async (req, res) => {
     res.status(201).json({
       error: false,
       message: "User created.",
-      user,
+      user
     });
   } catch (error) {
     console.error(error);
     if (error.original.code === "ER_DUP_ENTRY") {
       res.status(400).json({
         error: true,
-        message: "That username is already taken.",
+        message: "That username is already taken."
       });
     } else {
       res.status(500).json({
         error: true,
-        message: "Couldn't create a new user.",
+        message: "Couldn't create a new user."
       });
     }
   }
@@ -113,13 +118,13 @@ router.delete("/api/users/:id", async (req, res) => {
     const result = await db.User.destroy({ where: { id: req.params.id } });
     res.json({
       error: false,
-      message: "ok",
+      message: "ok"
     });
   } catch (error) {
     console.error(error);
     res.status(500).json({
       error: true,
-      message: "Couldn't delete user.",
+      message: "Couldn't delete user."
     });
   }
 });
@@ -138,9 +143,10 @@ router.post("/login", async (req, res) => {
     // couldn't find that username so send back a 400? status
     res.status(400).json({
       error: true,
-      message: "Couldn't find that username.",
+      message: "Couldn't find that username."
     });
   }
 });
+
 
 module.exports = router;
