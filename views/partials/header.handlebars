@@ -3,13 +3,13 @@
         <a href="/"><img href="" class="logo is-left" src="/assets/images/CBNEW.png"
                 style="width: 20%; box-shadow: 2 2 3px;"></a>
 
-        {{!-- {{#if username}} --}}
         <hr>
         <a href="/drawing" class="headerbuttons" style="font-size:medium"><strong>Create New</strong></a>
         <a href="/gallery" class="headerbuttons" style="font-size:medium"><strong>Cobalt Art Gallery</strong></a>
         <a href="/{{username}}" class="headerbuttons" style="font-size:medium"><strong>My Drawings</strong></a>
+        {{#if username}}
         <a href="/logout" class="headerbuttons" style="font-size:medium; background-color: white; "><strong>Log
                 Out</strong></a>
+        {{/if}}
     </div>
-    {{!-- {{/if}} --}}
 </header>
