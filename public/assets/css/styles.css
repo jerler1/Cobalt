@@ -16,7 +16,12 @@ html {
   background-position: center center;
   min-height: 100%;
 }
-
+.canvas {
+  align-items: center;
+  box-shadow: inset;
+  border: #FEAE00;
+  border-style: groove;
+}
 /* =============================== */
 body {
   background-image: url("/assets/images/cbg3.jpg");

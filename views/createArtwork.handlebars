@@ -1,6 +1,6 @@
 {{> header}}
 
-<div class="container">
+<div class="container title is-bold">
   <h1>Create New Artwork</h1>
   {{#if user }}
     <h2>{{ user.userName }}</h2>
@@ -16,11 +16,11 @@
     {{> toolbar }}
   </div>
   <div>
-    <label for="drawingName">Name:</label>
-    <input type="text" id="drawingName" name="drawingName" value="Untitled drawing">
+    <label style="font-size:x-large; color: #03045c;for="drawingName">Name:</label>
+    <input type="text" style="font-size:large; font-weight: bold; color:#ffae00; background-color: #03045c;id="drawingName" name="drawingName" value="Untitled drawing">
   </div>
   <div id="drawing-area" style="position: absolute;">
-    <canvas id="main" width="500" height="500"
+    <canvas id="main" width="1200" height="500"
       style="border: 1px solid black; position: absolute; left: 0; top: 0;"></canvas>
   </div>
 </div>
