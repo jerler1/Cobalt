@@ -3,13 +3,14 @@ $(document).ready(function () {
   const initialButton = $(".initialButton");
   const creatingUser = $(".creatingUser");
   const logInUser = $(".logInUser");
+  
 
   const createUserNameInput = $("#createUserNameInput");
   const logInUserNameInput = $("#logInUserNameInput");
   const createUserSubmit = $("#createUserSubmit");
   const logInUserSubmit = $("#logInUserSubmit");
   const makeLoginForm = $("#makeLoginForm");
-  const makeCreateForm = $("#makeCreateForm");
+  const makeCreateForm = $("#makeCreateForm"); 
   // Functions.
   function transitionForm(e, input) {
     e.preventDefault();
@@ -54,6 +55,7 @@ $(document).ready(function () {
         console.error(err);
       });
   }
+
   // Event Handlers.
   initialButton.on("click", transitionForm);
   makeLoginForm.on("click", (e) => {
@@ -76,4 +78,5 @@ $(document).ready(function () {
       logInUserSubmit.click();
     }
   });
+  
 });

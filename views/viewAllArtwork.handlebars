@@ -1,8 +1,8 @@
 {{> header }}
+
 <img src="/assets/images/gallery.png" class="rhead" style="width: 70%;" alt="">
 <div class="section">
     <div class="container">
-        <h1>Gallery</h1>
         <div class="columns is-flex-wrap-wrap">
             {{#each drawings}}
             {{> drawings user=this.User name=name link=link id=id}}
