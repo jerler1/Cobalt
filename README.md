@@ -19,7 +19,9 @@ Have you ever wanted to make an art project with a friend?  Cobalt Canvas is for
 ### Steps required to run locally
 1. Clone/download the code in this repo
 2. Navigate to the location of the code downloaded
-3. Double-click on the html file provided in the downloaded code to preview
+3. Run `npm install` to add required packages
+4. Run `npm start` 
+5. Open your browser to localhost with the port address
 ### Steps required to run online
 1. Click the "VIEW APP" link in this README
 
