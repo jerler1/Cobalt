@@ -1,5 +1,11 @@
 {{> header }}
 
-{{#each user.Drawings }}
-  {{> drawings user=../user name=name link=link}}
-{{/each}}
+<section class="section">
+  <div class="container">
+    <div class="columns is-flex-wrap-wrap">
+      {{#each user.Drawings }}
+        {{> drawings user=../user name=name link=link id=id}}
+      {{/each}}
+    </div>
+  </div>
+</section>

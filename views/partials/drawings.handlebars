@@ -1,16 +1,15 @@
-<div class="w3-container">
-  <h2>ArtWork Card Example</h2>
-
-  <div class="w3-card-4 card " style="width: 300px;">
+<div class="column is-one-quarter">
+  <div class="card">
 
     <div class="w3-container w3-center is-bold">
-      <h3>{{ this.name }}</h3>
-      <img src="{{ this.link }}" alt="Artwork" style="width:80%">
-      <h5>{{ user.userName }}</h5>
-
-      <div class="w3-section">
-        <button class="button">Edit</button>
-        <button class="button">Share</button>
+      <div class="card-image">
+        <figure class="image">
+          <img src="{{ this.link }}" alt="Artwork" width="500" height="500">
+        </figure>
+      </div>
+      <div class="card-content">
+        <a href="/{{user.userName}}/drawing/{{this.id}}">{{ this.name }}</a>
+        <p>By <a href="/{{user.userName}}">{{ user.userName }}</a></p>
       </div>
     </div>
   </div>
