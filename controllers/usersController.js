@@ -11,7 +11,6 @@ router.get("/logout", (req, res) => {
 });
 
 router.get("/users", async (req, res) => {
-  console.log(req.session.user);
   try {
     const users = await db.User.findAll();
     res.render("viewAllUsers", {
@@ -76,7 +75,6 @@ router.get("/api/users/:id", async (req, res) => {
 });
 
 router.post("/api/users", async (req, res) => {
-  console.log(req.session);
   const { userName } = req.body;
   const newUser = {
     userName
@@ -85,7 +83,6 @@ router.post("/api/users", async (req, res) => {
   try {
     const user = await db.User.create(newUser);
     req.session.user = user;
-    console.log(req.session.user);
     // should probably check the result.
     res.status(201).json({
       error: false,

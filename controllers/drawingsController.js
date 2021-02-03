@@ -9,8 +9,6 @@ const router = express.Router();
 router.get("/gallery", async (req, res) => {
   try {
     const drawings = await db.Drawing.findAll({ include: db.User });
-    console.log(drawings[1].dataValues.User.dataValues.userName);
-    console.log("sanity check");
     res.render("viewAllArtwork", {
       drawings,
       username: req.session.user && req.session.user.userName,
