@@ -10,8 +10,8 @@ html {
   height: 100%;
 }
 .landingPageBG {
-  background-image: url("../images/main.png");
-  background-size: contain;
+  background-image: url("../images/main3.png");
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   min-height: 100%;
