@@ -34,7 +34,6 @@ $(document).ready(function () {
   function createUser(e) {
     e.preventDefault();
     const userName = createUserNameInput.val();
-    console.log(userName);
     // Do we want to validate here?
     $.post("/api/users", { userName })
       .then(function (result) {

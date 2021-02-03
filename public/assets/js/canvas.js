@@ -48,7 +48,6 @@ if (ownerControls != null) {
         contentType: 'application/json',
         data: JSON.stringify({ name: drawingName, link, data: pathData, userId }),
       }).then(response => {
-        console.log(response);
         // Pop up a notification or something that says saved?
         alert('Drawing updated successfully.');
       }).catch((error) => {
@@ -170,7 +169,6 @@ function handleButtonClick(e) {
     const userId = e.currentTarget.getAttribute('data-userid');
     const link  = c.toDataURL();
     $.post("/api/drawings", { name: drawingName, link, data: pathData, userId }).then(response => {
-      console.log(response);
       location.href = `/${response.user.userName}/drawing/${response.drawing.id}`;
     }).catch((error) => {
       // TODO: actually handle the error.
