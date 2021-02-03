@@ -34,7 +34,7 @@ app.engine(
 app.set("view engine", "handlebars");
 
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", { username: req.session.user && req.session.user.userName });
 });
 
 app.get("/api/config", (req, res) => {
